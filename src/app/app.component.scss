@@ -1,0 +1,27 @@
+#footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0.8rem;
+    z-index: 999;
+
+    a {
+        @media screen and (orientation: landscape) {
+            width: 3.3vw;
+            height: 3.3vw;
+        }
+
+        @media screen and (orientation: portrait) {
+            width: 3.6vh;
+            height: 3.6vh;
+        }
+    }
+
+    svg {
+        background: none;
+
+        path {
+            fill: currentColor;
+        }
+    }
+}

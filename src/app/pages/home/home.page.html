@@ -1,0 +1,116 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button
+            class="toggle-menu-button"
+            [ngClass]="{ 'mat-button-toggle-checked': showMenu }"
+            (click)="showMenu = !showMenu">
+        <mat-icon>menu</mat-icon>
+    </button>
+
+    <span class="title">Theme Viewer</span>
+
+    <span class="spacer"></span>
+    
+    <a mat-stroked-button
+       href="https://github.com/lVlyke/lithium-ngx-material-theming"
+       class="project-ref"
+       target="_blank">ngx-material-theming</a>
+</mat-toolbar>
+
+<mat-sidenav-container>
+    <mat-sidenav id="sidenav" mode="side" [opened]="showMenu">
+        <mat-radio-group id="sidenav-radio-group" [(ngModel)]="activeTheme">
+            <mat-list>
+                <h1 mat-subheader id="lists-header">
+                    <mat-icon color="accent">color_lens</mat-icon>
+                    <span>Themes</span>
+                </h1>
+
+                <h3 mat-subheader>
+                    <span>Preset Themes</span>
+                </h3>
+
+                <ng-container *ngFor="let theme of presetThemes">
+                    <ng-container *ngTemplateOutlet="themeRadioTemplate; context: { $implicit: theme }"></ng-container>
+                </ng-container>
+
+                <h3 mat-subheader>
+                    <span>Custom Themes</span>
+                </h3>
+
+                <ng-container *ngFor="let theme of customThemes">
+                    <ng-container *ngTemplateOutlet="themeRadioTemplate; context: { $implicit: theme }"></ng-container>
+                </ng-container>
+                
+                <ng-template #themeRadioTemplate let-theme>
+                    <mat-radio-button class="mat-flat-button"
+                                      [color]="activeTheme === theme ? 'accent' : 'none'"
+                                      [value]="theme">
+                        <span class="theme-label-data">
+                            <div class="theme-color-display" [ngStyle]="{ 'background-color': getThemeColor(theme, 'primary') }"></div>
+
+                            <span class="theme-name">{{ theme }}</span>
+                        </span>
+
+                        <ng-container *ngTemplateOutlet="spacer"></ng-container>
+
+                        <ng-template #spacer>
+                            <span class="spacer"></span>
+                        </ng-template>
+                    </mat-radio-button>
+                </ng-template>
+
+                <mat-list-item id="add-theme">
+                    <mat-form-field id="add-theme-field" appearance="outline">
+                        <mat-label id="add-theme-label">
+                            <mat-icon id ="add-theme-label-icon" color="primary">add</mat-icon>
+                            <span id ="add-theme-label-text">New theme</span>
+                        </mat-label>
+                        <mat-select id="add-theme-select">
+                            <mat-option (click)="onAddBasicTheme()">Basic</mat-option>
+                            <mat-option (click)="onAddAdvancedTheme()">Advanced</mat-option>
+                            <mat-option (click)="onAddRandomTheme()">Random</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-list-item>
+            </mat-list>
+        </mat-radio-group>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <mat-card class="theme-color-card">
+            <mat-card-title>
+                <span class="theme-color-display" [ngStyle]="{ 'background-color': getThemeColor(activeTheme, 'primary') }"></span>
+                &nbsp;Primary
+                &nbsp;<span class="theme-color-hex">{{ getThemeColor(activeTheme, 'primary') | uppercase }}</span>
+            </mat-card-title>
+        </mat-card>
+
+        <mat-card class="theme-color-card">
+            <mat-card-title>
+                <span class="theme-color-display" [ngStyle]="{ 'background-color': getThemeColor(activeTheme, 'accent') }"></span>
+                &nbsp;Accent
+                &nbsp;<span class="theme-color-hex">{{ getThemeColor(activeTheme, 'accent') | uppercase }}</span>
+            </mat-card-title>
+        </mat-card>
+
+        <mat-card class="theme-color-card">
+            <mat-card-title>
+                <span class="theme-color-display" [ngStyle]="{ 'background-color': getThemeColor(activeTheme, 'warn') }"></span>
+                &nbsp;Warn
+                &nbsp;<span class="theme-color-hex">{{ getThemeColor(activeTheme, 'warn') | uppercase }}</span>
+            </mat-card-title>
+        </mat-card>
+
+        <mat-accordion>
+            <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h3>Theme Preview</h3>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+        
+                <app-theme-preview></app-theme-preview>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </mat-sidenav-content>
+</mat-sidenav-container>

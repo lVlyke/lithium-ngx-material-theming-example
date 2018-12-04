@@ -1,0 +1,23 @@
+form {
+
+    > div {
+        margin-bottom: 0.5rem;
+    }
+
+    mat-checkbox, mat-label, mat-form-field, button {
+        margin-right: 0.5rem;
+    }
+
+    mat-select {
+        display: inline;
+    }
+
+    mat-slider {
+        width: 50%;
+    }
+
+    ::ng-deep .mat-tab-body {
+        padding: 1rem;
+        height: 200px;
+    }
+}

@@ -1,0 +1,8 @@
+@import "~@angular/material/theming";
+@import "~@lithiumjs/ngx-material-theming/styles/theme";
+
+@include app-theme("default",
+    mat-palette($mat-blue),
+    mat-palette($mat-pink, A200, A100, A400),
+    mat-palette($mat-red)
+);

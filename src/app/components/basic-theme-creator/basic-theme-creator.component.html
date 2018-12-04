@@ -1,0 +1,67 @@
+<li-theme-container>
+    <mat-card class="overlay-card">
+        <mat-toolbar color="primary">New Theme (Basic)</mat-toolbar>
+
+        <mat-card-content>
+            <form>
+                <mat-checkbox color="primary" name="darkTheme" [(ngModel)]="darkTheme"></mat-checkbox>
+                <mat-label class="dark-theme-label">Dark Theme</mat-label>
+
+                <mat-card class="color-card" id="primary-card">
+                    <ng-container *ngTemplateOutlet="colorInputTemplate; context: { $implicit: 'primaryColor', label: 'Primary Color' }"></ng-container>
+                </mat-card>
+
+                <mat-card class="color-card" id="accent-card">
+                    <ng-container *ngTemplateOutlet="colorInputTemplate; context: { $implicit: 'accentColor', label: 'Accent Color' }"></ng-container>
+                </mat-card>
+
+                <mat-card class="color-card" id="warn-card">
+                    <ng-container *ngTemplateOutlet="colorInputTemplate; context: { $implicit: 'warnColor', label: 'Warn Color' }"></ng-container>
+                </mat-card>
+
+                <mat-form-field class="name-field">
+                    <mat-label>Theme Name</mat-label>
+                    <input matInput
+                        #themeNameInput="matInput"
+                        type="text"
+                        autocomplete="off"
+                        required
+                        pattern="-?[a-zA-Z\_]+[a-zA-Z0-9\-\_]*"
+                        placeholder="my-new-theme"
+                        name="themeName"
+                        [(ngModel)]="themeName">
+                </mat-form-field>
+
+                <mat-grid-list [cols]="2" gutterSize="0.5rem" rowHeight="38px">
+                    <mat-grid-tile>
+                        <button mat-stroked-button color="primary" (click)="onCancel()">Cancel</button>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile>
+                        <button mat-raised-button color="primary" [disabled]="!themeName || themeNameInput.errorState" (click)="onSubmit()">Create</button>
+                    </mat-grid-tile>
+                </mat-grid-list>
+
+                <!-- Templates -->
+                <ng-template #colorInputTemplate let-color let-label="label">
+                    <mat-grid-list [cols]="5" gutterSize="0.5rem" rowHeight="30px" (click)="input.focus()">
+                        <mat-grid-tile class="input-tile">
+                            <input class="color-picker-input"
+                                    #input
+                                    [(colorPicker)]="this[color]"
+                                    [cpCancelButton]="true"
+                                    cpCancelButtonClass="mat-primary mat-button mat-stroked-button picker-button"
+                                    [cpOKButton]="true"
+                                    cpOKButtonClass="mat-primary mat-button mat-raised-button picker-button"
+                                    [style.background]="this[color]">
+                        </mat-grid-tile>
+
+                        <mat-grid-tile class="label-tile" [colspan]="4">
+                            <mat-label>{{ label }}</mat-label>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                </ng-template>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</li-theme-container>

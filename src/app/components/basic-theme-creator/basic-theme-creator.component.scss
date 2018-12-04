@@ -1,0 +1,71 @@
+@import "~@angular/material/theming";
+
+mat-card.overlay-card {
+    width: 20vw;
+    min-width: 200px;
+    padding: 0;
+
+    & mat-card-content {
+        padding: 1rem;
+    }
+}
+
+mat-card.color-card {
+
+    &#primary-card, &#accent-card, &#warn-card {
+        margin-top: 1rem;
+
+        &:not(:hover) {
+            @include mat-elevation(3);
+        }
+
+        &:hover {
+            cursor: pointer;
+            @include mat-elevation(8);
+        }
+    }
+
+    .input-tile {
+        min-width: 30px;
+    }
+
+    .color-picker-input {
+        width: 24px;
+        height: 24px;
+        border: 1px solid black;
+        caret-color: transparent;
+        z-index: 999;
+    
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+mat-grid-tile {
+    &::ng-deep .mat-figure {
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: row;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.name-field {
+    margin-top: 0.5rem;
+}
+
+.dark-theme-label {
+    margin-left: 0.5rem;
+}
+
+::ng-deep button.picker-button {
+    margin-left: 0.5rem;
+}
