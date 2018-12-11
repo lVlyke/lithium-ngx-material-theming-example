@@ -7,6 +7,7 @@ import { MatSidenavContainer } from '@angular/material';
 import { PresetTheme } from 'src/app/models/preset-theme';
 import { OverlayHelpers } from 'src/app/services/overlay-helpers';
 import { BasicThemeCreatorComponent } from 'src/app/components/basic-theme-creator/basic-theme-creator.component';
+import { AdvancedThemeCreatorComponent } from 'src/app/components/advanced-theme-creator/advanced-theme-creator.component';
 
 @Component({
     selector: 'app-home-page',
@@ -76,8 +77,24 @@ export class HomePageComponent extends AotAware {
 
         this.onAddAdvancedTheme$
             .pipe(withLatestFrom(this.customThemes$))
-            .subscribe(([, _customThemes]) => {
-                // TODO
+            .subscribe(([, customThemes]) => {
+                const ref = overlayHelpers.createGlobal(AdvancedThemeCreatorComponent, {
+                    hasBackdrop: true
+                });
+                const component = ref.component.instance;
+
+                merge(component.onCancel$, component.onSubmit$).subscribe(() => ref.overlay.dispose());
+
+                component.onSubmit$
+                    .pipe(withLatestFrom(component.theme$, component.themeName$, component.darkTheme$))
+                    .subscribe(([, theme, themeName, darkTheme]) => {
+                        // Create the theme
+                        ThemeLoader.create('' + themeName, theme.primary, theme.accent, theme.warn, darkTheme);
+
+                        // Add the theme and make it active
+                        this.customThemes$.next(customThemes.concat(themeName));
+                        this.activeTheme$.next(themeName);
+                    });
             });
 
         this.onAddRandomTheme$

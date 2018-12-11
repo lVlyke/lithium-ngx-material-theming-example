@@ -1,0 +1,137 @@
+<li-theme-container>
+    <mat-card class="overlay-card">
+        <mat-toolbar color="primary">
+            <span>New Theme (Advanced)</span>
+        </mat-toolbar>
+
+        <mat-card-content>
+            <form>
+                <mat-checkbox color="primary" name="darkTheme" [(ngModel)]="darkTheme"></mat-checkbox>
+                <mat-label class="dark-theme-label">Dark Theme</mat-label>
+
+                <div class="accordion-container">
+                    <mat-accordion>
+                        <mat-expansion-panel class="color-panel" id="primary-panel">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <span class="theme-color-display" [ngStyle]="{ 'background-color': primaryColor }"></span>
+                                    <h3>Primary Palette</h3>
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                    
+                            <ng-container *ngTemplateOutlet="paletteInputTemplate; context: { $implicit: 'primaryPalette' }"></ng-container>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+
+                    <mat-accordion>
+                        <mat-expansion-panel class="color-panel" id="accent-panel">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <span class="theme-color-display" [ngStyle]="{ 'background-color': accentColor }"></span>
+                                    <h3>Accent Palette</h3>
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                    
+                            <ng-container *ngTemplateOutlet="paletteInputTemplate; context: { $implicit: 'accentPalette' }"></ng-container>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+
+                    <mat-accordion>
+                        <mat-expansion-panel class="color-panel" id="warn-panel">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <span class="theme-color-display" [ngStyle]="{ 'background-color': warnColor }"></span>
+                                    <h3>Warn Palette</h3>
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                    
+                            <ng-container *ngTemplateOutlet="paletteInputTemplate; context: { $implicit: 'warnPalette' }"></ng-container>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </div>
+
+                <mat-form-field class="name-field">
+                    <mat-label>Theme Name</mat-label>
+                    <input matInput
+                        #themeNameInput="matInput"
+                        type="text"
+                        autocomplete="off"
+                        required
+                        pattern="-?[a-zA-Z\_]+[a-zA-Z0-9\-\_]*"
+                        placeholder="my-new-theme"
+                        name="themeName"
+                        [(ngModel)]="themeName">
+                </mat-form-field>
+
+                <mat-grid-list [cols]="2" gutterSize="0.5rem" rowHeight="38px">
+                    <mat-grid-tile>
+                        <button mat-stroked-button color="primary" (click)="onCancel()">Cancel</button>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile>
+                        <button mat-raised-button color="primary" [disabled]="!themeName || themeNameInput.errorState" (click)="onSubmit()">Create</button>
+                    </mat-grid-tile>
+                </mat-grid-list>
+
+                <!-- Templates -->
+                <ng-template #paletteInputTemplate let-palette>
+                    <div class="palette-actions">
+                        <button mat-raised-button (click)="input.focus()">
+                            <mat-icon [style.color]="this[palette][500]">format_color_fill</mat-icon>
+                            Basic
+                        </button>
+                        <input class="basic-color-picker-input"
+                                    #input
+                                    [colorPicker]="this[palette][500]"
+                                    (colorPickerSelect)="onCreateBasicPalette([palette, $event])"
+                                    [cpCancelButton]="true"
+                                    cpCancelButtonClass="mat-primary mat-button mat-stroked-button picker-button"
+                                    [cpOKButton]="true"
+                                    cpOKButtonClass="mat-primary mat-button mat-raised-button picker-button">
+
+                        <button mat-raised-button (click)="onShowPaletteSrc(palette)">
+                            <mat-icon [style.color]="this[palette][500]">code</mat-icon>
+                        </button>
+                    </div>
+
+                    <ng-container *ngTemplateOutlet="colorListTemplate; context: { $implicit: this[palette] }"></ng-container>
+
+                    <mat-accordion>
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <h3>Contrast Colors</h3>
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                    
+                            <ng-container *ngTemplateOutlet="colorListTemplate; context: { $implicit: this[palette].contrast }"></ng-container>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+
+                    <!-- Templates -->
+                    <ng-template #colorListTemplate let-colorSrc>
+                        <ng-container *ngFor="let color of paletteColors">
+                            <mat-grid-list [cols]="5" gutterSize="0.5rem" rowHeight="30px" (click)="input.focus()">
+                                <mat-grid-tile class="input-tile">
+                                    <input class="color-picker-input"
+                                            #input
+                                            [(colorPicker)]="colorSrc[color]"
+                                            (colorPickerChange)="onPaletteChange(palette)"
+                                            [cpCancelButton]="true"
+                                            cpCancelButtonClass="mat-primary mat-button mat-stroked-button picker-button"
+                                            [cpOKButton]="true"
+                                            cpOKButtonClass="mat-primary mat-button mat-raised-button picker-button"
+                                            [style.background]="colorSrc[color]">
+                                </mat-grid-tile>
+    
+                                <mat-grid-tile class="label-tile" [colspan]="4">
+                                    <mat-label>{{ color }}</mat-label>
+                                </mat-grid-tile>
+                            </mat-grid-list>
+                        </ng-container>
+                    </ng-template>
+                </ng-template>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</li-theme-container>

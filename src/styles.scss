@@ -8,6 +8,18 @@
 
 // @angular/material style overrides
 
+mat-toolbar {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    > * {
+        text-overflow: inherit;
+        overflow: inherit;
+        white-space: inherit;
+    }
+}
+
 mat-form-field.mat-inline-label {
 
     &.mat-focused label.mat-form-field-label {
@@ -18,9 +30,24 @@ mat-form-field.mat-inline-label {
 
 // Custom styles
 
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
 html, body {
     height: 100vh;
-    overflow-y: hidden;
 
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.theme-color-display {
+    display: inline-block;
+    border: 1px solid rgba(white, 0.3);
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}  

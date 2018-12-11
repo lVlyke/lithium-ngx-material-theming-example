@@ -12,6 +12,8 @@ import { ThemeContainer, ThemeLoader } from '@lithiumjs/ngx-material-theming';
 })
 export class BasicThemeCreatorComponent extends AotAware {
 
+    private static readonly THEME_PREVIEW_NAME = '--new-basic-theme';
+
     @OnInit()
     private readonly onInit$: Observable<void>;
 
@@ -56,10 +58,11 @@ export class BasicThemeCreatorComponent extends AotAware {
             .pipe(mergeMapTo(combineLatest(this.theme$, this.darkTheme$)))
             .pipe(filter(([theme]) => !!theme))
             .subscribe(([theme, darkTheme]) => {
-                ThemeLoader.unloadCompiled('--new-basic-theme');
-                ThemeLoader.createBasic('--new-basic-theme', theme.primary, theme.accent, theme.warn, darkTheme);
+                const themeName = BasicThemeCreatorComponent.THEME_PREVIEW_NAME;
+                ThemeLoader.unloadCompiled(themeName);
+                ThemeLoader.createBasic(themeName, theme.primary, theme.accent, theme.warn, darkTheme);
 
-                this.themeContainer.theme$.next('--new-basic-theme');
+                this.themeContainer.theme$.next(themeName);
                 this.themeContainer.disabled$.next(false);
             });
     }

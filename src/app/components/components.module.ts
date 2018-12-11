@@ -17,7 +17,8 @@ import {
     MatTabsModule,
     MatBadgeModule,
     MatChipsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatExpansionModule
 } from '@angular/material';
 import { CommonModule } from '@angular/common';
 import { BasicThemeCreatorComponent } from './basic-theme-creator/basic-theme-creator.component';
@@ -25,6 +26,7 @@ import { FormsModule } from '@angular/forms';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { NgxMaterialThemingModule } from '@lithiumjs/ngx-material-theming';
 import { ThemePreviewComponent } from './theme-preview/theme-preview.component';
+import { AdvancedThemeCreatorComponent } from './advanced-theme-creator/advanced-theme-creator.component';
 
 @NgModule({
     imports: [
@@ -51,14 +53,17 @@ import { ThemePreviewComponent } from './theme-preview/theme-preview.component';
         MatTabsModule,
         MatBadgeModule,
         MatChipsModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatExpansionModule
     ],
     declarations: [
         BasicThemeCreatorComponent,
+        AdvancedThemeCreatorComponent,
         ThemePreviewComponent
     ],
     entryComponents: [
         BasicThemeCreatorComponent,
+        AdvancedThemeCreatorComponent,
         ThemePreviewComponent
     ],
     exports: [
