@@ -63,7 +63,7 @@ export class BasicThemeCreatorComponent extends AotAware {
                 ThemeLoader.createBasic(themeName, theme.primary, theme.accent, theme.warn, darkTheme);
 
                 this.themeContainer.theme$.next(themeName);
-                this.themeContainer.disabled$.next(false);
+                this.themeContainer.active$.next(true);
             });
     }
 }

@@ -14,7 +14,7 @@ export type AdvancedThemeProfile = {
     templateUrl: './advanced-theme-creator.component.html',
     styleUrls: ['./advanced-theme-creator.component.scss']
 })
-export class AdvancedThemeCreatorComponent /*extends AotAware*/ {
+export class AdvancedThemeCreatorComponent extends AotAware {
 
     private static readonly THEME_PREVIEW_NAME = '--new-advanced-theme';
 
@@ -85,7 +85,7 @@ export class AdvancedThemeCreatorComponent /*extends AotAware*/ {
     private readonly themeContainer: ThemeContainer;
 
     constructor() {
-        //super();
+        super();
 
         const computePalette = (color: string): ThemeLoader.Palette  => (<any>ThemeLoader).computePalette(color);
 
@@ -126,7 +126,7 @@ export class AdvancedThemeCreatorComponent /*extends AotAware*/ {
                 ThemeLoader.create(themeName, theme.primary, theme.accent, theme.warn, darkTheme);
 
                 this.themeContainer.theme$.next(themeName);
-                this.themeContainer.disabled$.next(false);
+                this.themeContainer.active$.next(true);
             });
 
         this.onDestroy$
