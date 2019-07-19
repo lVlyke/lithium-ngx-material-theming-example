@@ -39,7 +39,7 @@ export class HomePageComponent extends AotAware {
     @StateEmitter()
     private readonly showMenu$: Subject<boolean>;
 
-    @ViewChild(MatSidenavContainer)
+    @ViewChild(MatSidenavContainer, { static: false })
     private readonly container: MatSidenavContainer;
 
     private _themeCache: { [themeName: string]: PresetTheme.Profile } = {};

@@ -1,8 +1,8 @@
 import { Component, Output, ViewChild } from '@angular/core';
-import { StateEmitter, EventSource, AotAware, OnInit } from '@lithiumjs/angular';
+import { StateEmitter, EventSource, AotAware, AfterViewInit } from '@lithiumjs/angular';
 import { Subject, Observable, combineLatest } from 'rxjs';
 import { PresetTheme } from 'src/app/models/preset-theme';
-import { map, filter, mergeMapTo } from 'rxjs/operators';
+import { map, filter, mergeMapTo, delay } from 'rxjs/operators';
 import { ThemeContainer, ThemeLoader } from '@lithiumjs/ngx-material-theming';
 
 @Component({
@@ -14,8 +14,8 @@ export class BasicThemeCreatorComponent extends AotAware {
 
     private static readonly THEME_PREVIEW_NAME = '--new-basic-theme';
 
-    @OnInit()
-    private readonly onInit$: Observable<void>;
+    @AfterViewInit()
+    private readonly afterViewInit$: Observable<void>;
 
     @EventSource()
     public readonly onCancel$: Observable<void>;
@@ -44,7 +44,7 @@ export class BasicThemeCreatorComponent extends AotAware {
     @StateEmitter({ initialValue: PresetTheme.profiles.default.warn })
     protected readonly warnColor$: Subject<string>;
 
-    @ViewChild(ThemeContainer)
+    @ViewChild(ThemeContainer, { static: false })
     private readonly themeContainer: ThemeContainer;
 
     constructor() {
@@ -54,7 +54,8 @@ export class BasicThemeCreatorComponent extends AotAware {
             .pipe(map(([primary, accent, warn]) => ({ primary, accent, warn })))
             .subscribe(this.theme$);
 
-        this.onInit$
+        this.afterViewInit$
+            .pipe(delay(0))
             .pipe(mergeMapTo(combineLatest(this.theme$, this.darkTheme$)))
             .pipe(filter(([theme]) => !!theme))
             .subscribe(([theme, darkTheme]) => {
