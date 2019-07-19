@@ -1,9 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { AotAware, StateEmitter, AfterViewInit, EventSource } from '@lithiumjs/angular';
-import { Subject, Observable, merge, fromEvent } from 'rxjs';
-import { delay, map, mergeMap, withLatestFrom } from 'rxjs/operators';
+import { Subject, Observable, merge } from 'rxjs';
+import { delay, withLatestFrom } from 'rxjs/operators';
 import { ThemeContainer, ThemeLoader } from '@lithiumjs/ngx-material-theming';
-import { MatSidenavContainer } from '@angular/material';
 import { PresetTheme } from 'src/app/models/preset-theme';
 import { OverlayHelpers } from 'src/app/services/overlay-helpers';
 import { BasicThemeCreatorComponent } from 'src/app/components/basic-theme-creator/basic-theme-creator.component';
@@ -38,9 +37,6 @@ export class HomePageComponent extends AotAware {
 
     @StateEmitter()
     private readonly showMenu$: Subject<boolean>;
-
-    @ViewChild(MatSidenavContainer, { static: false })
-    private readonly container: MatSidenavContainer;
 
     private _themeCache: { [themeName: string]: PresetTheme.Profile } = {};
 
@@ -109,15 +105,11 @@ export class HomePageComponent extends AotAware {
                 this.activeTheme$.next(themeName);
             });
 
-        // Workaround for broken MatSidenavContainer resizing in @angular/material
-        // Adapted from: https://github.com/angular/material2/issues/6743#issuecomment-328453963
+        // Show the side menu on page load
         this.afterViewInit$.pipe(
-            delay(850),
-            map(() => this.showMenu$.next(true)),
-            mergeMap(() => merge((<any>this.container)._ngZone.onMicrotaskEmpty, fromEvent(window, 'resize'))),
+            delay(850)
         ).subscribe(() => {
-            (<any>this.container)._updateContentMargins();
-            (<any>this.container)._changeDetectorRef.markForCheck();
+            this.showMenu$.next(true);
         });
     }
 
