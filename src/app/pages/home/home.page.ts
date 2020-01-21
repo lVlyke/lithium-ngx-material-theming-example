@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { AotAware, StateEmitter, AfterViewInit, EventSource } from '@lithiumjs/angular';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { AotAware, StateEmitter, AfterViewInit, EventSource, AutoPush } from '@lithiumjs/angular';
 import { Subject, Observable, merge } from 'rxjs';
 import { delay, withLatestFrom } from 'rxjs/operators';
-import { ThemeContainer, ThemeLoader } from '@lithiumjs/ngx-material-theming';
+import { ThemeContainer, ThemeGenerator } from '@lithiumjs/ngx-material-theming';
 import { PresetTheme } from 'src/app/models/preset-theme';
 import { OverlayHelpers } from 'src/app/services/overlay-helpers';
 import { BasicThemeCreatorComponent } from 'src/app/components/basic-theme-creator/basic-theme-creator.component';
@@ -11,8 +11,10 @@ import { AdvancedThemeCreatorComponent } from 'src/app/components/advanced-theme
 @Component({
     selector: 'app-home-page',
     templateUrl: './home.page.html',
-    styleUrls: ['./home.page.scss']
+    styleUrls: ['./home.page.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
+@AutoPush()
 export class HomePageComponent extends AotAware {
 
     public readonly presetThemes = PresetTheme.values;
@@ -44,7 +46,7 @@ export class HomePageComponent extends AotAware {
         return new RegExp(`\\.mat-icon\\.mat-${color}[\\s\\n]*{[\\s\\n]*color:[\\s\\n]*([^;}]+)[\\s\\n]*(?:;|})`);
     }
 
-    constructor(overlayHelpers: OverlayHelpers, protected themeContainer: ThemeContainer) {
+    constructor(overlayHelpers: OverlayHelpers, protected themeContainer: ThemeContainer, _cdRef: ChangeDetectorRef) {
         super();
 
         this.customThemes$.next(this.loadThemes());
@@ -52,23 +54,23 @@ export class HomePageComponent extends AotAware {
         this.onAddBasicTheme$
             .pipe(withLatestFrom(this.customThemes$))
             .subscribe(([, customThemes]) => {
-                const ref = overlayHelpers.createGlobal(BasicThemeCreatorComponent, {
+                const ref = overlayHelpers.createGlobal<BasicThemeCreatorComponent>(BasicThemeCreatorComponent, {
                     hasBackdrop: true
                 });
                 const component = ref.component.instance;
-
-                merge(component.onCancel$, component.onSubmit$).subscribe(() => ref.overlay.dispose());
 
                 component.onSubmit$
                     .pipe(withLatestFrom(component.theme$, component.themeName$, component.darkTheme$))
                     .subscribe(([, theme, themeName, darkTheme]) => {
                         // Create the theme
-                        ThemeLoader.createBasic('' + themeName, theme.primary, theme.accent, theme.warn, darkTheme);
+                        ThemeGenerator.createBasic('' + themeName, theme.primary, theme.accent, theme.warn, darkTheme);
 
                         // Add the theme and make it active
                         this.customThemes$.next(customThemes.concat(themeName));
                         this.activeTheme$.next(themeName);
                     });
+
+                merge(component.onCancel$, component.onSubmit$).subscribe(() => ref.overlay.dispose());
             });
 
         this.onAddAdvancedTheme$
@@ -79,18 +81,18 @@ export class HomePageComponent extends AotAware {
                 });
                 const component = ref.component.instance;
 
-                merge(component.onCancel$, component.onSubmit$).subscribe(() => ref.overlay.dispose());
-
                 component.onSubmit$
                     .pipe(withLatestFrom(component.theme$, component.themeName$, component.darkTheme$))
                     .subscribe(([, theme, themeName, darkTheme]) => {
                         // Create the theme
-                        ThemeLoader.create('' + themeName, theme.primary, theme.accent, theme.warn, darkTheme);
+                        ThemeGenerator.create('' + themeName, theme.primary, theme.accent, theme.warn, darkTheme);
 
                         // Add the theme and make it active
                         this.customThemes$.next(customThemes.concat(themeName));
                         this.activeTheme$.next(themeName);
                     });
+
+                merge(component.onCancel$, component.onSubmit$).subscribe(() => ref.overlay.dispose());
             });
 
         this.onAddRandomTheme$
@@ -98,7 +100,7 @@ export class HomePageComponent extends AotAware {
             .subscribe(([, customThemes]) => {
                 // Create a random theme
                 const themeName = `random-${customThemes.length}`;
-                ThemeLoader.createRandom(themeName);
+                ThemeGenerator.createRandom(themeName);
 
                 // Add the theme and make it active
                 this.customThemes$.next(customThemes.concat(themeName));

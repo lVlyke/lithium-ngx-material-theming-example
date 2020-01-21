@@ -308,15 +308,22 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@lithiumjs/angular@^2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@lithiumjs/angular/-/angular-2.3.0.tgz#4b4b617be3353a3cd15ce82bfb6dae8c6614c763"
-  integrity sha512-6xHg84svU7bY6NytEl0TW+/hBCYjW9UYUd0UmNliI09ykiKPh//Lm73MK6YuYG5PZinnyG8QAfU7j6NI1hA16Q==
+"@lithiumjs/angular@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@lithiumjs/angular/-/angular-3.0.0.tgz#734876410e71c3a75e39f2249513a4d4f0296e5e"
+  integrity sha512-rTfqWiBOGnacYmCXsAj5FkkWPg3Vyiw7a3geHDb9hn/LiEaXNS1FekQBp5aJb6XkkdzfBsf4YZSIQB4st5o/Yg==
+  dependencies:
+    tslib "^1.9.0"
 
-"@lithiumjs/ngx-material-theming@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@lithiumjs/ngx-material-theming/-/ngx-material-theming-0.1.0.tgz#eeac3719d270aebaf87d2dba0bc394ac82f26251"
-  integrity sha512-ElNxQ4k801pVgOS8Br/E+Xb7OxZHDiIX/0DtUfdZW69eg/R9E09H8izQG5aYUicBi0w7z+D2do/6TNpuXnSw8A==
+"@lithiumjs/ngx-material-theming@0.3.0-rc.0":
+  version "0.3.0-rc.0"
+  resolved "https://registry.yarnpkg.com/@lithiumjs/ngx-material-theming/-/ngx-material-theming-0.3.0-rc.0.tgz#ca5cc1581a3bc3beac51f494506d0740a2b9faae"
+  integrity sha512-FcVRmQpAIs5rYemX9yps+Kh0y3tbHDI3DfKxRN7aFVqJtMMkC9HuYK3zF0eTCH45fFaNeoJinHee5KIXmHcvDA==
+  dependencies:
+    tslib "^1.9.0"
+  optionalDependencies:
+    chroma-js "^2.0.0"
+    sass "^1.22.12"
 
 "@ngtools/webpack@8.1.2":
   version "8.1.2"
@@ -1513,10 +1520,10 @@ chownr@^1.1.1:
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-1.1.2.tgz#a18f1e0b269c8a6a5d3c86eb298beb14c3dd7bf6"
   integrity sha512-GkfeAQh+QNy3wquu9oIZr6SS5x7wGdSgNQvD10X3r+AZr1Oys22HW8kAmDMvNg2+Dm0TeGaEuO8gFwdBXxwO8A==
 
-chroma-js@^1.4.0:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/chroma-js/-/chroma-js-1.4.1.tgz#eb2d9c4d1ff24616be84b35119f4d26f8205f134"
-  integrity sha512-jTwQiT859RTFN/vIf7s+Vl/Z2LcMrvMv3WUFmd/4u76AdlFC0NTNgqEEFPcRiHmAswPsMiQEDZLM8vX8qXpZNQ==
+chroma-js@^2.0.0:
+  version "2.0.6"
+  resolved "http://localhost:4873/chroma-js/-/chroma-js-2.0.6.tgz#2d4b761be09bf142b541f0011f64f213ecf6c8b6"
+  integrity sha512-IiiClbBRkRwuXNl6impq5ssEhUGpmWvc5zzImZbDUWLWcFbj6ZbtsdZEx6sIXMKes7azgYaUpnmsY1T8BL6PqQ==
 
 chrome-trace-event@^1.0.0:
   version "1.0.2"
@@ -5665,6 +5672,13 @@ sass@1.22.2:
   version "1.22.2"
   resolved "https://registry.yarnpkg.com/sass/-/sass-1.22.2.tgz#ed9abee7a3e409fe2ccfdc1b66c64c7c841e0c62"
   integrity sha512-enuQuy/CbfrZLA2vOy9tB7CK7pP5bZllnMbr5nPGWCFelwt0EMUVGC11gsv9rybkWc8pp/NKVY/c5+AKyjbnXg==
+  dependencies:
+    chokidar ">=2.0.0 <4.0.0"
+
+sass@^1.22.12:
+  version "1.22.12"
+  resolved "http://127.0.0.1:4873/sass/-/sass-1.22.12.tgz#5cbdd38720ffd1857da695331faee9f634bcb5d7"
+  integrity sha512-u5Rxn+dKTPCW5/11kMNxtmqKsxCjcpnqj9CaJoru1NqeJ0DOa9rOM00e0HqmseTAatGkKoLY+jaNecMYevu1gg==
   dependencies:
     chokidar ">=2.0.0 <4.0.0"
 

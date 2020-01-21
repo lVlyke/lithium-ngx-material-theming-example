@@ -3,10 +3,10 @@ import { StateEmitter, EventSource, AotAware, OnDestroy, AfterViewInit } from '@
 import { Subject, Observable, combineLatest } from 'rxjs';
 import { PresetTheme } from 'src/app/models/preset-theme';
 import { map, filter, mergeMapTo, withLatestFrom, delay } from 'rxjs/operators';
-import { ThemeContainer, ThemeLoader } from '@lithiumjs/ngx-material-theming';
+import { ThemeContainer, ThemeLoader, ThemeGenerator } from '@lithiumjs/ngx-material-theming';
 
 export type AdvancedThemeProfile = {
-    [K in keyof PresetTheme.Profile]: ThemeLoader.Palette;
+    [K in keyof PresetTheme.Profile]: ThemeGenerator.Palette;
 };
 
 @Component({
@@ -18,7 +18,7 @@ export class AdvancedThemeCreatorComponent extends AotAware {
 
     private static readonly THEME_PREVIEW_NAME = '--new-advanced-theme';
 
-    public readonly paletteColors: Array<keyof ThemeLoader.Palette & number> = [
+    public readonly paletteColors: Array<keyof ThemeGenerator.Palette & number> = [
         50,
         100,
         200,
@@ -64,13 +64,13 @@ export class AdvancedThemeCreatorComponent extends AotAware {
     public readonly darkTheme$: Subject<boolean>;
 
     @StateEmitter()
-    protected readonly primaryPalette$: Subject<ThemeLoader.Palette>;
+    protected readonly primaryPalette$: Subject<ThemeGenerator.Palette>;
 
     @StateEmitter()
-    protected readonly accentPalette$: Subject<ThemeLoader.Palette>;
+    protected readonly accentPalette$: Subject<ThemeGenerator.Palette>;
 
     @StateEmitter()
-    protected readonly warnPalette$: Subject<ThemeLoader.Palette>;
+    protected readonly warnPalette$: Subject<ThemeGenerator.Palette>;
 
     @StateEmitter.Alias('primaryPalette$.500')
     protected readonly primaryColor$: Observable<string>;
@@ -87,7 +87,7 @@ export class AdvancedThemeCreatorComponent extends AotAware {
     constructor() {
         super();
 
-        const computePalette = (color: string): ThemeLoader.Palette  => (<any>ThemeLoader).computePalette(color);
+        const computePalette = (color: string): ThemeGenerator.Palette  => (<any>ThemeGenerator).computePalette(color);
 
         this.primaryPalette$.next(computePalette(PresetTheme.profiles.default.primary));
         this.accentPalette$.next(computePalette(PresetTheme.profiles.default.accent));
@@ -124,7 +124,7 @@ export class AdvancedThemeCreatorComponent extends AotAware {
             .subscribe(([theme, darkTheme]) => {
                 const themeName = AdvancedThemeCreatorComponent.THEME_PREVIEW_NAME;
                 ThemeLoader.unloadCompiled(themeName);
-                ThemeLoader.create(themeName, theme.primary, theme.accent, theme.warn, darkTheme);
+                ThemeGenerator.create(themeName, theme.primary, theme.accent, theme.warn, darkTheme);
 
                 this.themeContainer.theme$.next(themeName);
                 this.themeContainer.active$.next(true);

@@ -1,15 +1,17 @@
-import { Component, Output, ViewChild } from '@angular/core';
-import { StateEmitter, EventSource, AotAware, AfterViewInit } from '@lithiumjs/angular';
+import { Component, Output, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { StateEmitter, EventSource, AotAware, AfterViewInit, AutoPush } from '@lithiumjs/angular';
 import { Subject, Observable, combineLatest } from 'rxjs';
 import { PresetTheme } from 'src/app/models/preset-theme';
 import { map, filter, mergeMapTo, delay } from 'rxjs/operators';
-import { ThemeContainer, ThemeLoader } from '@lithiumjs/ngx-material-theming';
+import { ThemeContainer, ThemeLoader, ThemeGenerator } from '@lithiumjs/ngx-material-theming';
 
 @Component({
     selector: 'app-basic-theme-creator',
     templateUrl: './basic-theme-creator.component.html',
-    styleUrls: ['./basic-theme-creator.component.scss']
+    styleUrls: ['./basic-theme-creator.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
+@AutoPush()
 export class BasicThemeCreatorComponent extends AotAware {
 
     private static readonly THEME_PREVIEW_NAME = '--new-basic-theme';
@@ -23,16 +25,16 @@ export class BasicThemeCreatorComponent extends AotAware {
     @EventSource()
     public readonly onSubmit$: Observable<void>;
 
-    @StateEmitter()
     @Output('theme')
+    @StateEmitter()
     public readonly theme$: Subject<PresetTheme.Profile>;
 
-    @StateEmitter({ initialValue: '' })
     @Output('themeName')
+    @StateEmitter({ initialValue: '' })
     public readonly themeName$: Subject<string>;
 
-    @StateEmitter({ initialValue: false })
     @Output('darkTheme')
+    @StateEmitter({ initialValue: false })
     public readonly darkTheme$: Subject<boolean>;
 
     @StateEmitter({ initialValue: PresetTheme.profiles.default.primary })
@@ -47,7 +49,7 @@ export class BasicThemeCreatorComponent extends AotAware {
     @ViewChild(ThemeContainer, { static: false })
     private readonly themeContainer: ThemeContainer;
 
-    constructor() {
+    constructor(_cdRef: ChangeDetectorRef) {
         super();
 
         combineLatest(this.primaryColor$, this.accentColor$, this.warnColor$)
@@ -61,7 +63,7 @@ export class BasicThemeCreatorComponent extends AotAware {
             .subscribe(([theme, darkTheme]) => {
                 const themeName = BasicThemeCreatorComponent.THEME_PREVIEW_NAME;
                 ThemeLoader.unloadCompiled(themeName);
-                ThemeLoader.createBasic(themeName, theme.primary, theme.accent, theme.warn, darkTheme);
+                ThemeGenerator.createBasic(themeName, theme.primary, theme.accent, theme.warn, darkTheme);
 
                 this.themeContainer.theme$.next(themeName);
                 this.themeContainer.active$.next(true);
