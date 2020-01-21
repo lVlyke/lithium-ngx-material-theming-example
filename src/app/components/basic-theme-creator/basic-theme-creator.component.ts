@@ -4,6 +4,7 @@ import { Subject, Observable, combineLatest } from 'rxjs';
 import { PresetTheme } from 'src/app/models/preset-theme';
 import { map, filter, mergeMapTo, delay } from 'rxjs/operators';
 import { ThemeContainer, ThemeLoader, ThemeGenerator } from '@lithiumjs/ngx-material-theming';
+import { AppThemeLoader } from 'src/app/services/theme-loader';
 
 @Component({
     selector: 'app-basic-theme-creator',
@@ -49,7 +50,7 @@ export class BasicThemeCreatorComponent extends AotAware {
     @ViewChild(ThemeContainer, { static: false })
     private readonly themeContainer: ThemeContainer;
 
-    constructor(_cdRef: ChangeDetectorRef) {
+    constructor(_cdRef: ChangeDetectorRef, appThemeLoader: AppThemeLoader) {
         super();
 
         combineLatest(this.primaryColor$, this.accentColor$, this.warnColor$)
@@ -60,13 +61,19 @@ export class BasicThemeCreatorComponent extends AotAware {
             .pipe(delay(0))
             .pipe(mergeMapTo(combineLatest(this.theme$, this.darkTheme$)))
             .pipe(filter(([theme]) => !!theme))
-            .subscribe(([theme, darkTheme]) => {
+            .subscribe(([theme, isDark]) => {
                 const themeName = BasicThemeCreatorComponent.THEME_PREVIEW_NAME;
                 ThemeLoader.unloadCompiled(themeName);
-                ThemeGenerator.createBasic(themeName, theme.primary, theme.accent, theme.warn, darkTheme);
-
-                this.themeContainer.theme$.next(themeName);
-                this.themeContainer.active$.next(true);
+                appThemeLoader.createFromTemplate({
+                    name: themeName,
+                    primaryPalette: ThemeGenerator.createPalette(theme.primary),
+                    accentPalette: ThemeGenerator.createPalette(theme.accent),
+                    warnPalette: ThemeGenerator.createPalette(theme.warn),
+                    isDark
+                }).subscribe(() => {
+                    this.themeContainer.theme$.next(themeName);
+                    this.themeContainer.active$.next(true);
+                });
             });
     }
 }

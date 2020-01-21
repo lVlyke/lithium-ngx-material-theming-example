@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { OverlayHelpers } from './services/overlay-helpers';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ComponentsModule } from './components/components.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ComponentsModule } from './components/components.module';
   imports: [
     BrowserAnimationsModule,
     AppRoutingModule,
+    HttpClientModule,
 
     OverlayModule,
     MatButtonModule,

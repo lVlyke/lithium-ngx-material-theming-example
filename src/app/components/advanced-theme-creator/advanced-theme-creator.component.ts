@@ -2,8 +2,9 @@ import { Component, Output, ViewChild } from '@angular/core';
 import { StateEmitter, EventSource, AotAware, OnDestroy, AfterViewInit } from '@lithiumjs/angular';
 import { Subject, Observable, combineLatest } from 'rxjs';
 import { PresetTheme } from 'src/app/models/preset-theme';
-import { map, filter, mergeMapTo, withLatestFrom, delay } from 'rxjs/operators';
+import { map, filter, mergeMapTo, withLatestFrom, delay, mergeMap } from 'rxjs/operators';
 import { ThemeContainer, ThemeLoader, ThemeGenerator } from '@lithiumjs/ngx-material-theming';
+import { AppThemeLoader } from 'src/app/services/theme-loader';
 
 export type AdvancedThemeProfile = {
     [K in keyof PresetTheme.Profile]: ThemeGenerator.Palette;
@@ -84,10 +85,10 @@ export class AdvancedThemeCreatorComponent extends AotAware {
     @ViewChild(ThemeContainer, { static: false })
     private readonly themeContainer: ThemeContainer;
 
-    constructor() {
+    constructor(appThemeLoader: AppThemeLoader) {
         super();
 
-        const computePalette = (color: string): ThemeGenerator.Palette  => (<any>ThemeGenerator).computePalette(color);
+        const computePalette = (color: string) => ThemeGenerator.createPalette(color);
 
         this.primaryPalette$.next(computePalette(PresetTheme.profiles.default.primary));
         this.accentPalette$.next(computePalette(PresetTheme.profiles.default.accent));
@@ -117,17 +118,24 @@ export class AdvancedThemeCreatorComponent extends AotAware {
                 }
             });
 
+        // Update the theme when the input values change
         this.afterViewInit$
             .pipe(delay(0))
             .pipe(mergeMapTo(combineLatest(this.theme$, this.darkTheme$)))
             .pipe(filter(([theme]) => !!theme))
-            .subscribe(([theme, darkTheme]) => {
+            .subscribe(([theme, isDark]) => {
                 const themeName = AdvancedThemeCreatorComponent.THEME_PREVIEW_NAME;
                 ThemeLoader.unloadCompiled(themeName);
-                ThemeGenerator.create(themeName, theme.primary, theme.accent, theme.warn, darkTheme);
-
-                this.themeContainer.theme$.next(themeName);
-                this.themeContainer.active$.next(true);
+                appThemeLoader.createFromTemplate({
+                    name: themeName,
+                    primaryPalette: theme.primary,
+                    accentPalette: theme.accent,
+                    warnPalette: theme.warn,
+                    isDark
+                }).subscribe(() => {
+                    this.themeContainer.theme$.next(themeName);
+                    this.themeContainer.active$.next(true);
+                });
             });
 
         this.onDestroy$

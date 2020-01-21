@@ -315,10 +315,10 @@
   dependencies:
     tslib "^1.9.0"
 
-"@lithiumjs/ngx-material-theming@0.3.0-rc.0":
-  version "0.3.0-rc.0"
-  resolved "https://registry.yarnpkg.com/@lithiumjs/ngx-material-theming/-/ngx-material-theming-0.3.0-rc.0.tgz#ca5cc1581a3bc3beac51f494506d0740a2b9faae"
-  integrity sha512-FcVRmQpAIs5rYemX9yps+Kh0y3tbHDI3DfKxRN7aFVqJtMMkC9HuYK3zF0eTCH45fFaNeoJinHee5KIXmHcvDA==
+"@lithiumjs/ngx-material-theming@0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@lithiumjs/ngx-material-theming/-/ngx-material-theming-0.4.1.tgz#b83704fcc43e109c48924b3db55b026c3df97c07"
+  integrity sha512-Pt3/A+QcO4+M0/xq+Sge2zrqjSIG9XiX69mjLvO8M+Q5h+YGe7hSex1eSM0kCSJy0e+M5Blm1rcPV3UOL69z2A==
   dependencies:
     tslib "^1.9.0"
   optionalDependencies:

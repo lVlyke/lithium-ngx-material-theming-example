@@ -11,11 +11,6 @@ mat-toolbar {
 
     .toggle-menu-button {
         margin-right: 8px;
-
-        &.mat-button-toggle-checked {
-            color: inherit;
-            background-color: rgba(white, 0.28);
-        }
     }
 
     .title, .project-ref {

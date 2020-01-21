@@ -1,3 +1,4 @@
+import * as chroma from "chroma-js";
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AotAware, StateEmitter, AfterViewInit, EventSource, AutoPush } from '@lithiumjs/angular';
 import { Subject, Observable, merge } from 'rxjs';
@@ -7,6 +8,7 @@ import { PresetTheme } from 'src/app/models/preset-theme';
 import { OverlayHelpers } from 'src/app/services/overlay-helpers';
 import { BasicThemeCreatorComponent } from 'src/app/components/basic-theme-creator/basic-theme-creator.component';
 import { AdvancedThemeCreatorComponent } from 'src/app/components/advanced-theme-creator/advanced-theme-creator.component';
+import { AppThemeLoader } from 'src/app/services/theme-loader';
 
 @Component({
     selector: 'app-home-page',
@@ -42,14 +44,12 @@ export class HomePageComponent extends AotAware {
 
     private _themeCache: { [themeName: string]: PresetTheme.Profile } = {};
 
-    private static THEME_COLOR_PARSER(color: string): RegExp {
-        return new RegExp(`\\.mat-icon\\.mat-${color}[\\s\\n]*{[\\s\\n]*color:[\\s\\n]*([^;}]+)[\\s\\n]*(?:;|})`);
-    }
-
-    constructor(overlayHelpers: OverlayHelpers, protected themeContainer: ThemeContainer, _cdRef: ChangeDetectorRef) {
+    constructor(
+        overlayHelpers: OverlayHelpers,
+        appThemeLoader: AppThemeLoader,
+        protected themeContainer: ThemeContainer,
+        _cdRef: ChangeDetectorRef) {
         super();
-
-        this.customThemes$.next(this.loadThemes());
 
         this.onAddBasicTheme$
             .pipe(withLatestFrom(this.customThemes$))
@@ -61,13 +61,19 @@ export class HomePageComponent extends AotAware {
 
                 component.onSubmit$
                     .pipe(withLatestFrom(component.theme$, component.themeName$, component.darkTheme$))
-                    .subscribe(([, theme, themeName, darkTheme]) => {
+                    .subscribe(([, theme, themeName, isDark]) => {
                         // Create the theme
-                        ThemeGenerator.createBasic('' + themeName, theme.primary, theme.accent, theme.warn, darkTheme);
-
-                        // Add the theme and make it active
-                        this.customThemes$.next(customThemes.concat(themeName));
-                        this.activeTheme$.next(themeName);
+                        appThemeLoader.createFromTemplate({
+                            name: '' + themeName, 
+                            primaryPalette: ThemeGenerator.createPalette(theme.primary),
+                            accentPalette: ThemeGenerator.createPalette(theme.accent),
+                            warnPalette: ThemeGenerator.createPalette(theme.warn),
+                            isDark
+                        }).subscribe(() => {
+                            // Add the theme and make it active
+                            this.customThemes$.next(customThemes.concat(themeName));
+                            this.activeTheme$.next(themeName);
+                        });
                     });
 
                 merge(component.onCancel$, component.onSubmit$).subscribe(() => ref.overlay.dispose());
@@ -83,29 +89,42 @@ export class HomePageComponent extends AotAware {
 
                 component.onSubmit$
                     .pipe(withLatestFrom(component.theme$, component.themeName$, component.darkTheme$))
-                    .subscribe(([, theme, themeName, darkTheme]) => {
+                    .subscribe(([, theme, themeName, isDark]) => {
                         // Create the theme
-                        ThemeGenerator.create('' + themeName, theme.primary, theme.accent, theme.warn, darkTheme);
-
-                        // Add the theme and make it active
-                        this.customThemes$.next(customThemes.concat(themeName));
-                        this.activeTheme$.next(themeName);
+                        appThemeLoader.createFromTemplate({
+                            name: '' + themeName,
+                            primaryPalette: theme.primary,
+                            accentPalette: theme.accent,
+                            warnPalette: theme.warn,
+                            isDark
+                        }).subscribe(() => {
+                            // Add the theme and make it active
+                            this.customThemes$.next(customThemes.concat(themeName));
+                            this.activeTheme$.next(themeName);
+                        });
                     });
 
                 merge(component.onCancel$, component.onSubmit$).subscribe(() => ref.overlay.dispose());
             });
 
-        this.onAddRandomTheme$
-            .pipe(withLatestFrom(this.customThemes$))
-            .subscribe(([, customThemes]) => {
-                // Create a random theme
-                const themeName = `random-${customThemes.length}`;
-                ThemeGenerator.createRandom(themeName);
-
+        // Create a new random theme when the user presses the random theme button
+        this.onAddRandomTheme$.pipe(
+            withLatestFrom(this.customThemes$)
+        ).subscribe(([, customThemes]) => {
+            // Create a random theme
+            const themeName = `random-${customThemes.length}`;
+            appThemeLoader.createFromTemplate({
+                isDark: Math.random() > 0.5,
+                name: themeName,
+                primaryPalette: ThemeGenerator.createPalette(chroma.random().hex()),
+                accentPalette: ThemeGenerator.createPalette(chroma.random().hex()),
+                warnPalette: ThemeGenerator.createPalette(chroma.random().hex())
+            }).subscribe(() => {
                 // Add the theme and make it active
                 this.customThemes$.next(customThemes.concat(themeName));
                 this.activeTheme$.next(themeName);
             });
+        });
 
         // Show the side menu on page load
         this.afterViewInit$.pipe(
@@ -123,17 +142,6 @@ export class HomePageComponent extends AotAware {
         return PresetTheme.values.includes(theme as PresetTheme);
     }
 
-    private loadThemes(): string[] {
-        let themes: string[] = [];
-        const userThemesJson: string = window.localStorage.getItem('themes');
-
-        if (userThemesJson) {
-            themes = themes.concat(JSON.parse(userThemesJson));
-        }
-
-        return themes;
-    }
-
     private themeCache(theme: string): PresetTheme.Profile {
         if (this.isPresetTheme(theme)) {
             return PresetTheme.profiles[theme];
@@ -145,8 +153,7 @@ export class HomePageComponent extends AotAware {
             if (themeElements && themeElements.length > 0) {
                 const element = themeElements.item(themeElements.length - 1);
                 return this._themeCache[theme] = ['primary', 'accent', 'warn'].reduce<PresetTheme.Profile>((profile, color) => {
-                    const result = HomePageComponent.THEME_COLOR_PARSER(color).exec(element.innerHTML);
-                    profile[color] = result.length > 1 ? result[1] : 'none';
+                    profile[color] = element.getAttribute(`data-color-${color}`) || 'none';
                     return profile;
                 }, {} as PresetTheme.Profile);
             } else {
