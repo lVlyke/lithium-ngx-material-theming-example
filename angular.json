@@ -33,6 +33,8 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/lithium-ngx-material-theming-example",
+              "deployUrl": "lithium-ngx-material-theming-example/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",

@@ -2,7 +2,7 @@ import { Component, Output, ViewChild, ChangeDetectionStrategy, ChangeDetectorRe
 import { StateEmitter, EventSource, AotAware, AfterViewInit, AutoPush } from '@lithiumjs/angular';
 import { Subject, Observable, combineLatest } from 'rxjs';
 import { PresetTheme } from 'src/app/models/preset-theme';
-import { map, filter, mergeMapTo, delay } from 'rxjs/operators';
+import { map, filter, mergeMapTo, delay, switchMap } from 'rxjs/operators';
 import { ThemeContainer, ThemeLoader, ThemeGenerator } from '@lithiumjs/ngx-material-theming';
 import { AppThemeLoader } from 'src/app/services/theme-loader';
 
@@ -61,19 +61,20 @@ export class BasicThemeCreatorComponent extends AotAware {
             .pipe(delay(0))
             .pipe(mergeMapTo(combineLatest(this.theme$, this.darkTheme$)))
             .pipe(filter(([theme]) => !!theme))
-            .subscribe(([theme, isDark]) => {
+            .pipe(switchMap((([theme, isDark]) => {
                 const themeName = BasicThemeCreatorComponent.THEME_PREVIEW_NAME;
                 ThemeLoader.unloadCompiled(themeName);
-                appThemeLoader.createFromTemplate({
+                
+                return appThemeLoader.createFromTemplate({
                     name: themeName,
                     primaryPalette: ThemeGenerator.createPalette(theme.primary),
                     accentPalette: ThemeGenerator.createPalette(theme.accent),
                     warnPalette: ThemeGenerator.createPalette(theme.warn),
                     isDark
-                }).subscribe(() => {
+                }).pipe(map(() => {
                     this.themeContainer.theme$.next(themeName);
                     this.themeContainer.active$.next(true);
-                });
-            });
+                }));
+            }))).subscribe();
     }
 }
