@@ -82,7 +82,7 @@ export class AdvancedThemeCreatorComponent extends AotAware {
     @StateEmitter.Alias('warnPalette$.500')
     protected readonly warnColor$: Observable<string>;
 
-    @ViewChild(ThemeContainer, { static: false })
+    @ViewChild(ThemeContainer)
     private readonly themeContainer: ThemeContainer;
 
     constructor(appThemeLoader: AppThemeLoader) {

@@ -1,6 +1,6 @@
 import * as chroma from "chroma-js";
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { AotAware, StateEmitter, AfterViewInit, EventSource, AutoPush } from '@lithiumjs/angular';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, Injector } from '@angular/core';
+import { StateEmitter, AfterViewInit, EventSource } from '@lithiumjs/angular';
 import { Subject, Observable, merge } from 'rxjs';
 import { delay, withLatestFrom } from 'rxjs/operators';
 import { ThemeContainer, ThemeGenerator } from '@lithiumjs/ngx-material-theming';
@@ -9,6 +9,7 @@ import { OverlayHelpers } from 'src/app/services/overlay-helpers';
 import { BasicThemeCreatorComponent } from 'src/app/components/basic-theme-creator/basic-theme-creator.component';
 import { AdvancedThemeCreatorComponent } from 'src/app/components/advanced-theme-creator/advanced-theme-creator.component';
 import { AppThemeLoader } from 'src/app/services/theme-loader';
+import { BaseComponent } from 'src/app/components/base-component';
 
 @Component({
     selector: 'app-home-page',
@@ -16,8 +17,7 @@ import { AppThemeLoader } from 'src/app/services/theme-loader';
     styleUrls: ['./home.page.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-@AutoPush()
-export class HomePageComponent extends AotAware {
+export class HomePageComponent extends BaseComponent {
 
     public readonly presetThemes = PresetTheme.values;
 
@@ -45,11 +45,12 @@ export class HomePageComponent extends AotAware {
     private _themeCache: { [themeName: string]: PresetTheme.Profile } = {};
 
     constructor(
+        injector: Injector,
         overlayHelpers: OverlayHelpers,
         appThemeLoader: AppThemeLoader,
         protected themeContainer: ThemeContainer,
-        _cdRef: ChangeDetectorRef) {
-        super();
+        cdRef: ChangeDetectorRef) {
+        super(injector, cdRef);
 
         this.onAddBasicTheme$
             .pipe(withLatestFrom(this.customThemes$))
