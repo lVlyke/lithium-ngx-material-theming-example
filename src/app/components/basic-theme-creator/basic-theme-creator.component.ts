@@ -1,10 +1,11 @@
-import { Component, Output, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { StateEmitter, EventSource, AotAware, AfterViewInit, AutoPush } from '@lithiumjs/angular';
+import { Component, Output, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Injector } from '@angular/core';
+import { StateEmitter, EventSource, AfterViewInit, AutoPush } from '@lithiumjs/angular';
 import { Subject, Observable, combineLatest } from 'rxjs';
 import { PresetTheme } from 'src/app/models/preset-theme';
 import { map, filter, mergeMapTo, delay, switchMap } from 'rxjs/operators';
 import { ThemeContainer, ThemeLoader, ThemeGenerator } from '@lithiumjs/ngx-material-theming';
 import { AppThemeLoader } from 'src/app/services/theme-loader';
+import { BaseComponent } from '../base-component';
 
 @Component({
     selector: 'app-basic-theme-creator',
@@ -12,8 +13,7 @@ import { AppThemeLoader } from 'src/app/services/theme-loader';
     styleUrls: ['./basic-theme-creator.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-@AutoPush()
-export class BasicThemeCreatorComponent extends AotAware {
+export class BasicThemeCreatorComponent extends BaseComponent {
 
     private static readonly THEME_PREVIEW_NAME = '--new-basic-theme';
 
@@ -47,11 +47,11 @@ export class BasicThemeCreatorComponent extends AotAware {
     @StateEmitter({ initialValue: PresetTheme.profiles.default.warn })
     protected readonly warnColor$: Subject<string>;
 
-    @ViewChild(ThemeContainer, { static: false })
+    @ViewChild(ThemeContainer)
     private readonly themeContainer: ThemeContainer;
 
-    constructor(_cdRef: ChangeDetectorRef, appThemeLoader: AppThemeLoader) {
-        super();
+    constructor(injector: Injector, cdRef: ChangeDetectorRef, appThemeLoader: AppThemeLoader) {
+        super(injector, cdRef);
 
         combineLatest(this.primaryColor$, this.accentColor$, this.warnColor$)
             .pipe(map(([primary, accent, warn]) => ({ primary, accent, warn })))

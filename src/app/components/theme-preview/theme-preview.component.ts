@@ -1,5 +1,5 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { AotAware } from '@lithiumjs/angular';
+import { Component, ChangeDetectionStrategy, Injector, ChangeDetectorRef } from '@angular/core';
+import { BaseComponent } from '../base-component';
 
 @Component({
     selector: 'app-theme-preview',
@@ -7,7 +7,11 @@ import { AotAware } from '@lithiumjs/angular';
     styleUrls: ['./theme-preview.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ThemePreviewComponent extends AotAware {
+export class ThemePreviewComponent extends BaseComponent {
 
     public sliderValue = 50;
+
+    constructor(injector: Injector, cdRef: ChangeDetectorRef) {
+        super(injector, cdRef);
+    }
 }
