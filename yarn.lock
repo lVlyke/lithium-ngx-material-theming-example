@@ -132,10 +132,12 @@
   dependencies:
     tslib "^2.0.0"
 
-"@angular/cdk@^9.0.0":
-  version "9.2.4"
-  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-9.2.4.tgz#8413958bd275e4c34be3b96f56444671dd30ba93"
-  integrity sha512-iw2+qHMXHYVC6K/fttHeNHIieSKiTEodVutZoOEcBu9rmRTGbLB26V/CRsfIRmA1RBk+uFYWc6UQZnMC3RdnJQ==
+"@angular/cdk@^11.0.0":
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-11.0.0.tgz#7ec0fc8b5051c54f4a3910e61f1ee7d30796c2d2"
+  integrity sha512-kfgEE/LDYMZB4NICChzWn/nTEeoZ3wxrYsDDcy2Qj+57zUmJcxBLL1h+tawYCy3a1g7ypDLYX7yrbPEBE7/EXQ==
+  dependencies:
+    tslib "^2.0.0"
   optionalDependencies:
     parse5 "^5.0.0"
 
@@ -229,10 +231,12 @@
   resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-11.0.0.tgz#fda2e5d2ea4cac56662b04ca72a5a0b8c2dd169d"
   integrity sha512-lwUVlaiIASNbKQ/EtCK5KOVIlpiyVvysN6idAD0rJHr6BRtrlqwiayNYbV5as5IJyPYLf2E8au3an9j0E/PFDw==
 
-"@angular/material@^9.0.0":
-  version "9.2.4"
-  resolved "https://registry.yarnpkg.com/@angular/material/-/material-9.2.4.tgz#2666ef606fbb88d60f8e2f18c5e4f94a3dd572d8"
-  integrity sha512-LkoTXE6B0slvMhvfZDdPWaz4yaYLkaAp5VSPunI9pxGsPxzqEV9e210wC1/sjG/76Nk8Ep7/2z9XKac8Q9bMwA==
+"@angular/material@^11.0.0":
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/@angular/material/-/material-11.0.0.tgz#6ef7048763e7415dabda54d32847b2821bf6413d"
+  integrity sha512-pTwYmBrRXbEzF5J/oayZF0ApA0tLN+CUl/2MaYFNLzvE/Kn6hIdDb7TonWAEBgeSHIzqzyTV8IUQuXwGaPds9A==
+  dependencies:
+    tslib "^2.0.0"
 
 "@angular/platform-browser-dynamic@^11.0.0":
   version "11.0.0"
@@ -1119,15 +1123,19 @@
     merge-source-map "^1.1.0"
     schema-utils "^2.7.0"
 
-"@lithiumjs/angular@5.0.0-rc.1":
-  version "5.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/@lithiumjs/angular/-/angular-5.0.0-rc.1.tgz#eb9abcc1c27e84c2d1aa172c3417a7e51dfe9bae"
-  integrity sha512-g6C6p6fWZj72MO9x1DVFIwf7wKwu90svlPebw5dbtqOUuKGKeTvji6d5PWyizCc9OIB50NW1FsESJSJUaJFl/A==
+"@lithiumjs/angular@6.0.0-beta.0":
+  version "6.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@lithiumjs/angular/-/angular-6.0.0-beta.0.tgz#cb6592404649d4a351a14091f9ec887ac82ed982"
+  integrity sha512-WYkJAWbQ/Hit+Feru8didgHfvZGHWflp589sz5Jh8YocdGZNt7X+FKsutZKBezToV9IwZRtPeR7mshgHvA+Byg==
+  dependencies:
+    tslib "^2.0.0"
 
-"@lithiumjs/ngx-material-theming@0.5.0-rc.0":
-  version "0.5.0-rc.0"
-  resolved "https://registry.yarnpkg.com/@lithiumjs/ngx-material-theming/-/ngx-material-theming-0.5.0-rc.0.tgz#b05613ce49bbe59543819e86935d1bc07495e465"
-  integrity sha512-nBPDwgwAlqSb3shQdLWrPEbA5Zr0Yg1I5VNa4J5gNoMeiLlUuAcHgOjXMUZBSvbLW1OWBlzGtllIwPPDICgKig==
+"@lithiumjs/ngx-material-theming@0.6.0-rc.0":
+  version "0.6.0-rc.0"
+  resolved "https://registry.yarnpkg.com/@lithiumjs/ngx-material-theming/-/ngx-material-theming-0.6.0-rc.0.tgz#dad780ed29802d9941c13dcb1a6d2a14405dee08"
+  integrity sha512-Xb0c6xwoGicsd5yY0JWIOrfBoKkpN9G3hbZmRtqpjFO9sdspi3nhFXLJe8FZQpBm+vy5lhGu+alXgL1VT/puEg==
+  dependencies:
+    tslib "^2.0.0"
 
 "@ngtools/webpack@11.0.1":
   version "11.0.1"
@@ -5732,10 +5740,12 @@ next-tick@~1.0.0:
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
   integrity sha1-yobR/ogoFpsBICCOPchCS524NCw=
 
-ngx-color-picker@^9.0.0:
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/ngx-color-picker/-/ngx-color-picker-9.1.0.tgz#402b18a527702f06e7aa9ca61de5f96990e40638"
-  integrity sha512-ViYBfXb4IL1UbM15LaZHYqHyHPYVEKg+rZB1GWSLqXVuDol3Cgt38D8XfOcivVAO60CziQ77k3ThDo31T6wC6A==
+ngx-color-picker@^10.0.0:
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/ngx-color-picker/-/ngx-color-picker-10.1.0.tgz#19a6993a74bb3553024623b20ca6ebffd2c50f9c"
+  integrity sha512-Q3BILkQP+l+dcX0joe7+xuHDKydhGnG09sUG1FmlLZFYIEX4+AQqHULh+hUAci8kZlLZuOG+mB2Uq54QYadItw==
+  dependencies:
+    tslib "^2.0.0"
 
 nice-try@^1.0.4:
   version "1.0.5"
