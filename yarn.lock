@@ -1123,17 +1123,17 @@
     merge-source-map "^1.1.0"
     schema-utils "^2.7.0"
 
-"@lithiumjs/angular@6.0.0-beta.0":
-  version "6.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@lithiumjs/angular/-/angular-6.0.0-beta.0.tgz#cb6592404649d4a351a14091f9ec887ac82ed982"
-  integrity sha512-WYkJAWbQ/Hit+Feru8didgHfvZGHWflp589sz5Jh8YocdGZNt7X+FKsutZKBezToV9IwZRtPeR7mshgHvA+Byg==
+"@lithiumjs/angular@6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@lithiumjs/angular/-/angular-6.0.0.tgz#db84951d0a69575b16dc9ecdcc034ca10badca61"
+  integrity sha512-WQ0cHqoBjwdyDy+tbnuDm1d6NzXO8Y7fG9hYmHadxhUFIRhQrG873sjsyDVkJweVhKdnPnEFzWoGH4xikl6vOA==
   dependencies:
     tslib "^2.0.0"
 
-"@lithiumjs/ngx-material-theming@0.6.0-rc.0":
-  version "0.6.0-rc.0"
-  resolved "https://registry.yarnpkg.com/@lithiumjs/ngx-material-theming/-/ngx-material-theming-0.6.0-rc.0.tgz#dad780ed29802d9941c13dcb1a6d2a14405dee08"
-  integrity sha512-Xb0c6xwoGicsd5yY0JWIOrfBoKkpN9G3hbZmRtqpjFO9sdspi3nhFXLJe8FZQpBm+vy5lhGu+alXgL1VT/puEg==
+"@lithiumjs/ngx-material-theming@0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@lithiumjs/ngx-material-theming/-/ngx-material-theming-0.6.0.tgz#6717075941ab9e795c0f315903ab87dbb0b2517c"
+  integrity sha512-NlbJHaZX/Q6f6SWp5FaeXDawrK+xc5+AVK+hEKJx5WITF2Y4zlg16ApKltDDR7OIwDmabaF0ZjOJJi2VH1g2zQ==
   dependencies:
     tslib "^2.0.0"
 
