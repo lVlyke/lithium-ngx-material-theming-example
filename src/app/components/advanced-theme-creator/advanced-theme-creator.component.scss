@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import "~@angular/material/theming";
 
 mat-card.overlay-card {
@@ -38,11 +39,11 @@ mat-expansion-panel.color-panel {
         margin-top: 1rem;
 
         &:not(:hover) {
-            @include mat-elevation(3);
+            @include mat.elevation(3);
         }
 
         &:hover, &.mat-expanded {
-            @include mat-elevation(8);
+            @include mat.elevation(8);
         }
     }
 

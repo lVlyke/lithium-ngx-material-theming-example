@@ -128,12 +128,12 @@
   dependencies:
     tslib "^2.1.0"
 
-"@angular/cdk@^11.0.0":
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-11.0.0.tgz#7ec0fc8b5051c54f4a3910e61f1ee7d30796c2d2"
-  integrity sha512-kfgEE/LDYMZB4NICChzWn/nTEeoZ3wxrYsDDcy2Qj+57zUmJcxBLL1h+tawYCy3a1g7ypDLYX7yrbPEBE7/EXQ==
+"@angular/cdk@^12.0.4":
+  version "12.0.4"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-12.0.4.tgz#074f17dc3f3f2ed054dace5ea2d6c89126e000df"
+  integrity sha512-NX/1kEc6ndyEHjGcMtMJYEjwmoURuwRSqKJLbGcHTUwXuuR+hfDP/vU1XDOeXNC80SV+0B4BpJnREkINILfYKw==
   dependencies:
-    tslib "^2.0.0"
+    tslib "^2.1.0"
   optionalDependencies:
     parse5 "^5.0.0"
 
@@ -226,12 +226,12 @@
   resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-12.0.4.tgz#af2610721953f4c26727c37d829c38fa7f85445b"
   integrity sha512-BtXQ6MlnmBO/Ld0tyWP7GezHu9EAd+UtEZqBdoCCO0AgQ3JN4WGctowmYxEBc2cVtKGpjKEgJfVQu80RxK4RZg==
 
-"@angular/material@^11.0.0":
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/@angular/material/-/material-11.0.0.tgz#6ef7048763e7415dabda54d32847b2821bf6413d"
-  integrity sha512-pTwYmBrRXbEzF5J/oayZF0ApA0tLN+CUl/2MaYFNLzvE/Kn6hIdDb7TonWAEBgeSHIzqzyTV8IUQuXwGaPds9A==
+"@angular/material@^12.0.4":
+  version "12.0.4"
+  resolved "https://registry.yarnpkg.com/@angular/material/-/material-12.0.4.tgz#0cd88328f846d7ba6485abc7f1888aef174d7e4c"
+  integrity sha512-pvfYEeUCLR7EmA6R/kkXz5jfl+RHwh3AS9X9kWARWIOzA7p0hG9ApoFT5KCofTBNp0nukau1QoGR4WGla6wWvQ==
   dependencies:
-    tslib "^2.0.0"
+    tslib "^2.1.0"
 
 "@angular/platform-browser-dynamic@^12.0.4":
   version "12.0.4"
@@ -1411,19 +1411,19 @@
     merge-source-map "^1.1.0"
     schema-utils "^2.7.0"
 
-"@lithiumjs/angular@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@lithiumjs/angular/-/angular-6.0.0.tgz#db84951d0a69575b16dc9ecdcc034ca10badca61"
-  integrity sha512-WQ0cHqoBjwdyDy+tbnuDm1d6NzXO8Y7fG9hYmHadxhUFIRhQrG873sjsyDVkJweVhKdnPnEFzWoGH4xikl6vOA==
+"@lithiumjs/angular@6.1.0-beta.0":
+  version "6.1.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@lithiumjs/angular/-/angular-6.1.0-beta.0.tgz#41a5dd6d11057a34f7b11b92bca4688a0389aa8b"
+  integrity sha512-fAwv98qwolcRCzfy2g9IrC2PXgr9daMXPfe5C/8+gNhwRYIJDzbd1OVrB3DtiK1W7BsPYU3PiucnaAA/uJWHZw==
   dependencies:
-    tslib "^2.0.0"
+    tslib "^2.1.0"
 
-"@lithiumjs/ngx-material-theming@0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@lithiumjs/ngx-material-theming/-/ngx-material-theming-0.6.0.tgz#6717075941ab9e795c0f315903ab87dbb0b2517c"
-  integrity sha512-NlbJHaZX/Q6f6SWp5FaeXDawrK+xc5+AVK+hEKJx5WITF2Y4zlg16ApKltDDR7OIwDmabaF0ZjOJJi2VH1g2zQ==
+"@lithiumjs/ngx-material-theming@0.7.0-rc.0":
+  version "0.7.0-rc.0"
+  resolved "https://registry.yarnpkg.com/@lithiumjs/ngx-material-theming/-/ngx-material-theming-0.7.0-rc.0.tgz#1ae74d5339b20ea4c55942ee103260d92bb688bd"
+  integrity sha512-6NI9wavv+3gfFu2GkOIj6xRkU1Ablnpie4n8gOIDgotREIMwutUi3Zgq71kR5ZXx0iOCJbWvnaxWLSieCyGliQ==
   dependencies:
-    tslib "^2.0.0"
+    tslib "^2.1.0"
 
 "@ngtools/webpack@12.0.4":
   version "12.0.4"
@@ -1524,10 +1524,30 @@
   resolved "https://registry.yarnpkg.com/@trysound/sax/-/sax-0.1.1.tgz#3348564048e7a2d7398c935d466c0414ebb6a669"
   integrity sha512-Z6DoceYb/1xSg5+e+ZlPZ9v0N16ZvZ+wYMraFue4HYrE4ttONKtsvruIRf6t9TBR0YvSOfi1hUU0fJfBLCDYow==
 
-"@types/chroma-js@^1.4.0":
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/@types/chroma-js/-/chroma-js-1.4.3.tgz#4456e5cb46885a4952324e55a4b6d4064904790c"
-  integrity sha512-m33zg9cRLtuaUSzlbMrr7iLIKNzrD4+M6Unt5+9mCu4BhR5NwnRjVKblINCwzcBXooukIgld8DtEncP8qpvbNg==
+"@tsconfig/node10@^1.0.7":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@tsconfig/node10/-/node10-1.0.8.tgz#c1e4e80d6f964fbecb3359c43bd48b40f7cadad9"
+  integrity sha512-6XFfSQmMgq0CFLY1MslA/CPUfhIL919M1rMsa5lP2P097N2Wd1sSX0tx1u4olM16fLNhtHZpRhedZJphNJqmZg==
+
+"@tsconfig/node12@^1.0.7":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@tsconfig/node12/-/node12-1.0.8.tgz#a883d62f049a64fea1e56a6bbe66828d11c6241b"
+  integrity sha512-LM6XwBhjZRls1qJGpiM/It09SntEwe9M0riXRfQ9s6XlJQG0JPGl92ET18LtGeYh/GuOtafIXqwZeqLOd0FNFQ==
+
+"@tsconfig/node14@^1.0.0":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@tsconfig/node14/-/node14-1.0.1.tgz#95f2d167ffb9b8d2068b0b235302fafd4df711f2"
+  integrity sha512-509r2+yARFfHHE7T6Puu2jjkoycftovhXRqW328PDXTVGKihlb1P8Z9mMZH04ebyajfRY7dedfGynlrFHJUQCg==
+
+"@tsconfig/node16@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.1.tgz#a6ca6a9a0ff366af433f42f5f0e124794ff6b8f1"
+  integrity sha512-FTgBI767POY/lKNDNbIzgAX6miIDBs6NTCbdlDb8TrWovHsSvaVIZDlTqym29C6UqhzwcJx4CYr+AlrMywA0cA==
+
+"@types/chroma-js@^2.1.3":
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/@types/chroma-js/-/chroma-js-2.1.3.tgz#0b03d737ff28fad10eb884e0c6cedd5ffdc4ba0a"
+  integrity sha512-1xGPhoSGY1CPmXLCBcjVZSQinFjL26vlR8ZqprsBWiFyED4JacJJ9zHhh5aaUXqbY9B37mKQ73nlydVAXmr1+g==
 
 "@types/component-emitter@^1.2.10":
   version "1.2.10"
@@ -1615,10 +1635,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-15.12.2.tgz#1f2b42c4be7156ff4a6f914b2fb03d05fa84e38d"
   integrity sha512-zjQ69G564OCIWIOHSXyQEEDpdpGl+G348RAKY0XXy9Z5kU9Vzv1GMNnkar/ZJ8dzXB3COzD9Mo9NtRZ4xfgUww==
 
-"@types/node@~8.9.4":
-  version "8.9.5"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.9.5.tgz#162b864bc70be077e6db212b322754917929e976"
-  integrity sha512-jRHfWsvyMtXdbhnz5CVHxaBgnV6duZnPlQuRSo/dm/GnmikNcmZhxIES4E9OZjUmQ8C+HCl4KJux+cXN/ErGDQ==
+"@types/node@~14.17.1":
+  version "14.17.3"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.17.3.tgz#6d327abaa4be34a74e421ed6409a0ae2f47f4c3d"
+  integrity sha512-e6ZowgGJmTuXa3GyaPbTGxX17tnThl2aSSizrFthQ7m9uLGZBXiGhgE55cjRZTF5kjZvYn9EOPOMljdjwbflxw==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -2614,10 +2634,10 @@ chownr@^2.0.0:
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-2.0.0.tgz#15bfbe53d2eab4cf70f18a8cd68ebe5b3cb1dece"
   integrity sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==
 
-chroma-js@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/chroma-js/-/chroma-js-2.1.0.tgz#c0be48a21fe797ef8965608c1c4f911ef2da49d5"
-  integrity sha512-uiRdh4ZZy+UTPSrAdp8hqEdVb1EllLtTHOt5TMaOjJUvi+O54/83Fc5K2ld1P+TJX+dw5B+8/sCgzI6eaur/lg==
+chroma-js@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/chroma-js/-/chroma-js-2.1.2.tgz#1075cb9ae25bcb2017c109394168b5cf3aa500ec"
+  integrity sha512-ri/ouYDWuxfus3UcaMxC1Tfp3IE9K5iQzxc2hSxbBRVNQFut1UuGAsZmiAf2mOUubzGJwgMSv9lHg+XqLaz1QQ==
   dependencies:
     cross-env "^6.0.3"
 
@@ -2955,6 +2975,11 @@ cosmiconfig@^7.0.0:
     parse-json "^5.0.0"
     path-type "^4.0.0"
     yaml "^1.10.0"
+
+create-require@^1.1.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/create-require/-/create-require-1.1.1.tgz#c1d7e8f1e5f6cfc9ff65f9cd352d37348756c333"
+  integrity sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==
 
 critters@0.0.10:
   version "0.0.10"
@@ -5798,10 +5823,10 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-ngx-color-picker@^10.0.0:
-  version "10.1.0"
-  resolved "https://registry.yarnpkg.com/ngx-color-picker/-/ngx-color-picker-10.1.0.tgz#19a6993a74bb3553024623b20ca6ebffd2c50f9c"
-  integrity sha512-Q3BILkQP+l+dcX0joe7+xuHDKydhGnG09sUG1FmlLZFYIEX4+AQqHULh+hUAci8kZlLZuOG+mB2Uq54QYadItw==
+ngx-color-picker@^11.0.0:
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-color-picker/-/ngx-color-picker-11.0.0.tgz#c1e5468505953bc579bf21014a135808820ea753"
+  integrity sha512-HyiFNPYLrCyYbFpLvZJaHC43RhjfDdFDij4pnvk9R46iH1scVtO6f2ibBgxRwBKKsT94KYvOH8wF8OrvztWdEw==
   dependencies:
     tslib "^2.0.0"
 
@@ -7458,7 +7483,7 @@ rxjs@^6.5.3:
   dependencies:
     tslib "^1.9.0"
 
-rxjs@~6.5.4:
+rxjs@~6.5.5:
   version "6.5.5"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.5.tgz#c5c884e3094c8cfee31bf27eb87e54ccfc87f9ec"
   integrity sha512-WfQI+1gohdf0Dai/Bbmk5L5ItH5tYqm3ki2c5GdWhKjalzjg93N3avFjVStyZZz+A2Em+ZxKH5bNghw9UeylGQ==
@@ -7857,7 +7882,7 @@ source-map-resolve@^0.6.0:
     atob "^2.1.2"
     decode-uri-component "^0.2.0"
 
-source-map-support@0.5.19, source-map-support@^0.5.5, source-map-support@^0.5.6, source-map-support@~0.5.19:
+source-map-support@0.5.19, source-map-support@^0.5.17, source-map-support@^0.5.5, source-map-support@~0.5.19:
   version "0.5.19"
   resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.5.19.tgz#a98b62f86dcaf4f67399648c085291ab9e8fed61"
   integrity sha512-Wonm7zOCIJzBGQdB+thsPar0kYuCIzYvxZwlBa87yi/Mdjv7Tip2cyVbLj5o0cFPN4EVkuTwb3GDDyUx2DGnGw==
@@ -8339,16 +8364,21 @@ tree-kill@1.2.2:
   resolved "https://registry.yarnpkg.com/tree-kill/-/tree-kill-1.2.2.tgz#4ca09a9092c88b73a7cdc5e8a01b507b0790a0cc"
   integrity sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==
 
-ts-node@~8.3.0:
-  version "8.3.0"
-  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-8.3.0.tgz#e4059618411371924a1fb5f3b125915f324efb57"
-  integrity sha512-dyNS/RqyVTDcmNM4NIBAeDMpsAdaQ+ojdf0GOLqE6nwJOgzEkdRNzJywhDfwnuvB10oa6NLVG1rUJQCpRN7qoQ==
+ts-node@~10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-10.0.0.tgz#05f10b9a716b0b624129ad44f0ea05dac84ba3be"
+  integrity sha512-ROWeOIUvfFbPZkoDis0L/55Fk+6gFQNZwwKPLinacRl6tsxstTF1DbAcLKkovwnpKMVvOMHP1TIbnwXwtLg1gg==
   dependencies:
+    "@tsconfig/node10" "^1.0.7"
+    "@tsconfig/node12" "^1.0.7"
+    "@tsconfig/node14" "^1.0.0"
+    "@tsconfig/node16" "^1.0.1"
     arg "^4.1.0"
+    create-require "^1.1.0"
     diff "^4.0.1"
     make-error "^1.1.1"
-    source-map-support "^0.5.6"
-    yn "^3.0.0"
+    source-map-support "^0.5.17"
+    yn "3.1.1"
 
 tslib@2.2.0:
   version "2.2.0"
@@ -8961,7 +8991,7 @@ yargs@^16.1.1, yargs@^16.2.0:
     y18n "^5.0.5"
     yargs-parser "^20.2.2"
 
-yn@^3.0.0:
+yn@3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/yn/-/yn-3.1.1.tgz#1e87401a09d767c1d5eab26a6e4c185182d2eb50"
   integrity sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==

@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import "~@angular/material/theming";
 
 :host::ng-deep, mat-sidenav-container {
@@ -100,7 +101,7 @@ mat-toolbar {
         }
 
         ::ng-deep .mat-form-field-outline {
-            @include mat-elevation(2);
+            @include mat.elevation(2);
         }
 
         ::ng-deep .mat-form-field-flex:hover {

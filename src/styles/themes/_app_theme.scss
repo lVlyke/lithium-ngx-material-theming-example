@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import "~@angular/material/theming";
 @import "~@lithiumjs/ngx-material-theming/styles/theme";
 
@@ -20,15 +21,15 @@
         button.toggle-menu-button {
 
             &.mat-button-toggle-checked {
-                $bg-color: mat-color($theme-primary, 800);
+                $bg-color: mat.get-color-from-palette($theme-primary, 800);
 
-                color: mat-contrast($theme-primary, 800);
+                color: mat.get-contrast-color-from-palette($theme-primary, 800);
                 background: $bg-color;
             }
         }
 
         #github-link {
-            color: mat-color($theme-accent, 500);
+            color: mat.get-color-from-palette($theme-accent, 500);
         }
     }
 }

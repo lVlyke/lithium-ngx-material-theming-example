@@ -1,9 +1,10 @@
+@use '~@angular/material' as mat;
 @import "~@angular/material/theming";
 @import "../app_theme";
 
 @include li-ex-theme("dark",
-    mat-palette($mat-green),
-    mat-palette($mat-blue),
-    mat-palette($mat-red),
+    mat.define-palette(mat.$green-palette),
+    mat.define-palette(mat.$blue-palette),
+    mat.define-palette(mat.$red-palette),
     true
 );
