@@ -1,5 +1,5 @@
 import { Component, Output, ViewChild } from '@angular/core';
-import { StateEmitter, EventSource, AotAware, OnDestroy, AfterViewInit } from '@lithiumjs/angular';
+import { StateEmitter, EventSource, OnDestroy, AfterViewInit, LiComponent } from '@lithiumjs/angular';
 import { Subject, Observable, combineLatest } from 'rxjs';
 import { PresetTheme } from 'src/app/models/preset-theme';
 import { map, filter, mergeMapTo, withLatestFrom, delay, mergeMap, switchMap } from 'rxjs/operators';
@@ -15,7 +15,7 @@ export type AdvancedThemeProfile = {
     templateUrl: './advanced-theme-creator.component.html',
     styleUrls: ['./advanced-theme-creator.component.scss']
 })
-export class AdvancedThemeCreatorComponent extends AotAware {
+export class AdvancedThemeCreatorComponent extends LiComponent {
 
     private static readonly THEME_PREVIEW_NAME = '--new-advanced-theme';
 
