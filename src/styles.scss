@@ -1,13 +1,17 @@
+@use '~@angular/material' as mat;
+
+// Normalize CSS styles accross browsers
 @import "~normalize.css/normalize";
-@import "~@angular/material/theming";
 
-@include mat-core();
+// Only include this once
+@include mat.core();
 
-// We'll bundle the default and dark themes will the app itself
+// We'll bundle the default and dark themes with the app itself
 @import "styles/themes/definitions/default";
 @import "styles/themes/definitions/dark";
 
-// @angular/material style overrides
+
+// @angular/material style overrides:
 
 mat-toolbar {
     text-overflow: ellipsis;
@@ -29,7 +33,7 @@ mat-form-field.mat-inline-label {
 }
 
 
-// Custom styles
+// Custom styles:
 
 html {
     box-sizing: border-box;

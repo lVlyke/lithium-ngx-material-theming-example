@@ -1,0 +1,21 @@
+@use '~@angular/material' as mat;
+
+@mixin declare(
+    $primary,
+    $accent,
+    $warn,
+) {
+    button.toggle-menu-button {
+
+        &.mat-button-toggle-checked {
+            $bg-color: mat.get-color-from-palette($primary, 800);
+
+            color: mat.get-contrast-color-from-palette($primary, 800);
+            background: $bg-color;
+        }
+    }
+
+    #github-link {
+        color: mat.get-color-from-palette($accent, 500);
+    }
+}

@@ -1,11 +1,3 @@
-@import "~@angular/material/theming";
-@import "~@lithiumjs/ngx-material-theming/styles/theme";
-@import "../app_theme";
+@use "../app_theme" as theme;
 
-@include li-ex-theme(
-    $template-theme-name,
-    mat-palette($template-theme-primary),
-    mat-palette($template-theme-accent),
-    mat-palette($template-theme-warn),
-    true
-);
+@include theme.declare-template-theme($is-dark: true);

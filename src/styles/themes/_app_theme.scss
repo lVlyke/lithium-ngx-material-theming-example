@@ -1,34 +1,34 @@
-@import "~@angular/material/theming";
-@import "~@lithiumjs/ngx-material-theming/styles/theme";
+@use '~@angular/material' as mat;
+@use "~@lithiumjs/ngx-material-theming" as mat-theming;
+@use "./extensions" as theme-exts;
 
-@mixin li-ex-theme(
-    $theme-name,
-    $theme-primary,
-    $theme-accent,
-    $theme-warn,
-    $isDark
+@mixin declare-theme(
+    $name,
+    $primary,
+    $accent,
+    $warn,
+    $is-dark: false
 ) {
-    @include app-theme(
-        $theme-name,
-        $theme-primary,
-        $theme-accent,
-        $theme-warn,
-        $isDark
+    @include mat-theming.declare-theme(
+        $name,
+        $primary,
+        $accent,
+        $warn,
+        $is-dark
     ) {
-        // We can define custom theme styles here using all of our palette colors:
+        // We define our custom override theme styles here:
+        @include theme-exts.declare($primary, $accent, $warn, $is-dark);
+    }
+}
 
-        button.toggle-menu-button {
-
-            &.mat-button-toggle-checked {
-                $bg-color: mat-color($theme-primary, 800);
-
-                color: mat-contrast($theme-primary, 800);
-                background: $bg-color;
-            }
-        }
-
-        #github-link {
-            color: mat-color($theme-accent, 500);
-        }
+@mixin declare-template-theme($is-dark: false) {
+    @include mat-theming.declare-template-theme($is-dark) {
+        // We define our custom override theme styles here:
+        @include theme-exts.declare(
+            mat-theming.$template-primary-palette,
+            mat-theming.$template-accent-palette,
+            mat-theming.$template-warn-palette,
+            $is-dark
+        );
     }
 }

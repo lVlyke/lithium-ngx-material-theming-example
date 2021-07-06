@@ -1,0 +1,12 @@
+@use "./global" as global-ext;
+
+@mixin declare(
+    $primary,
+    $accent,
+    $warn,
+    $is-dark
+) {
+    // Apply all theme extensions:
+
+    @include global-ext.declare($primary, $accent, $warn);
+}
