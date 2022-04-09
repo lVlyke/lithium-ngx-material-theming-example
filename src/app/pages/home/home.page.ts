@@ -1,9 +1,10 @@
 import * as chroma from "chroma-js";
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, Injector } from '@angular/core';
-import { StateEmitter, AfterViewInit, EventSource } from '@lithiumjs/angular';
+import { StateEmitter, AfterViewInit, EventSource, AsyncState, ComponentState } from '@lithiumjs/angular';
 import { Subject, Observable, merge } from 'rxjs';
 import { delay, withLatestFrom } from 'rxjs/operators';
-import { ThemeContainer, ThemeGenerator } from '@lithiumjs/ngx-material-theming';
+import { ThemeContainer } from '@lithiumjs/ngx-material-theming';
+import { ThemeGenerator } from '@lithiumjs/ngx-material-theming/dynamic';
 import { PresetTheme } from 'src/app/models/preset-theme';
 import { OverlayHelpers } from 'src/app/services/overlay-helpers';
 import { BasicThemeCreatorComponent } from 'src/app/components/basic-theme-creator/basic-theme-creator.component';
@@ -15,11 +16,17 @@ import { BaseComponent } from 'src/app/components/base-component';
     selector: 'app-home-page',
     templateUrl: './home.page.html',
     styleUrls: ['./home.page.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [ComponentState.create(HomePageComponent)]
 })
 export class HomePageComponent extends BaseComponent {
 
     public readonly presetThemes = PresetTheme.values;
+
+    public readonly activeTheme$ = this.themeContainer.theme$;
+
+    @AsyncState()
+    public readonly activeTheme!: string;
 
     @AfterViewInit()
     private readonly afterViewInit$: Observable<void>;
@@ -32,9 +39,6 @@ export class HomePageComponent extends BaseComponent {
 
     @EventSource()
     private readonly onAddRandomTheme$: Observable<void>;
-
-    @StateEmitter.Alias('themeContainer.theme$')
-    protected readonly activeTheme$: Subject<string>;
 
     @StateEmitter({ initialValue: [] })
     private readonly customThemes$: Subject<string[]>;
@@ -73,7 +77,7 @@ export class HomePageComponent extends BaseComponent {
                         }).subscribe(() => {
                             // Add the theme and make it active
                             this.customThemes$.next(customThemes.concat(themeName));
-                            this.activeTheme$.next(themeName);
+                            this.themeContainer.theme = themeName;
                         });
                     });
 
@@ -101,7 +105,7 @@ export class HomePageComponent extends BaseComponent {
                         }).subscribe(() => {
                             // Add the theme and make it active
                             this.customThemes$.next(customThemes.concat(themeName));
-                            this.activeTheme$.next(themeName);
+                            this.themeContainer.theme = themeName;
                         });
                     });
 
@@ -123,7 +127,7 @@ export class HomePageComponent extends BaseComponent {
             }).subscribe(() => {
                 // Add the theme and make it active
                 this.customThemes$.next(customThemes.concat(themeName));
-                this.activeTheme$.next(themeName);
+                this.themeContainer.theme = themeName;
             });
         });
 

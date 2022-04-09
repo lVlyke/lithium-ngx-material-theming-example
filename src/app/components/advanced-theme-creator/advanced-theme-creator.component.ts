@@ -2,12 +2,13 @@ import { Component, Output, ViewChild } from '@angular/core';
 import { StateEmitter, EventSource, OnDestroy, AfterViewInit, LiComponent } from '@lithiumjs/angular';
 import { Subject, Observable, combineLatest } from 'rxjs';
 import { PresetTheme } from 'src/app/models/preset-theme';
-import { map, filter, mergeMapTo, withLatestFrom, delay, mergeMap, switchMap } from 'rxjs/operators';
-import { ThemeContainer, ThemeLoader, ThemeGenerator } from '@lithiumjs/ngx-material-theming';
+import { map, filter, mergeMapTo, withLatestFrom, delay, switchMap } from 'rxjs/operators';
+import { ThemeContainer, ThemeLoader, ThemeCreator } from '@lithiumjs/ngx-material-theming';
 import { AppThemeLoader } from 'src/app/services/theme-loader';
+import { ThemeGenerator } from '@lithiumjs/ngx-material-theming/dynamic';
 
 export type AdvancedThemeProfile = {
-    [K in keyof PresetTheme.Profile]: ThemeGenerator.Palette;
+    [K in keyof PresetTheme.Profile]: ThemeCreator.Palette;
 };
 
 @Component({
@@ -19,7 +20,7 @@ export class AdvancedThemeCreatorComponent extends LiComponent {
 
     private static readonly THEME_PREVIEW_NAME = '--new-advanced-theme';
 
-    public readonly paletteColors: Array<keyof ThemeGenerator.Palette & number> = [
+    public readonly paletteColors: Array<keyof ThemeCreator.Palette & number> = [
         50,
         100,
         200,
@@ -65,13 +66,13 @@ export class AdvancedThemeCreatorComponent extends LiComponent {
     public readonly darkTheme$: Subject<boolean>;
 
     @StateEmitter()
-    protected readonly primaryPalette$: Subject<ThemeGenerator.Palette>;
+    protected readonly primaryPalette$: Subject<ThemeCreator.Palette>;
 
     @StateEmitter()
-    protected readonly accentPalette$: Subject<ThemeGenerator.Palette>;
+    protected readonly accentPalette$: Subject<ThemeCreator.Palette>;
 
     @StateEmitter()
-    protected readonly warnPalette$: Subject<ThemeGenerator.Palette>;
+    protected readonly warnPalette$: Subject<ThemeCreator.Palette>;
 
     @StateEmitter.Alias('primaryPalette$.500')
     protected readonly primaryColor$: Observable<string>;
@@ -134,8 +135,8 @@ export class AdvancedThemeCreatorComponent extends LiComponent {
                     warnPalette: theme.warn,
                     isDark
                 }).pipe(map(() => {
-                    this.themeContainer.theme$.next(themeName);
-                    this.themeContainer.active$.next(true);
+                    this.themeContainer.theme = themeName;
+                    this.themeContainer.active = true;
                 }));
             })).subscribe();
 

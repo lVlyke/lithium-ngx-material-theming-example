@@ -18,7 +18,7 @@
 
 <mat-sidenav-container>
     <mat-sidenav id="sidenav" mode="side" [opened]="showMenu">
-        <mat-radio-group id="sidenav-radio-group" [(ngModel)]="activeTheme">
+        <mat-radio-group id="sidenav-radio-group" [(ngModel)]="themeContainer.theme">
             <mat-list>
                 <h1 mat-subheader id="lists-header">
                     <mat-icon color="accent">color_lens</mat-icon>
@@ -76,7 +76,7 @@
         </mat-radio-group>
     </mat-sidenav>
 
-    <mat-sidenav-content>
+    <mat-sidenav-content *ngIf="activeTheme">
         <mat-card class="theme-color-card">
             <mat-card-title>
                 <span class="theme-color-display" [ngStyle]="{ 'background-color': getThemeColor(activeTheme, 'primary') }"></span>

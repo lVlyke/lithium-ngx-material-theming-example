@@ -1,11 +1,12 @@
 import { Component, Output, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Injector } from '@angular/core';
-import { StateEmitter, EventSource, AfterViewInit, AutoPush } from '@lithiumjs/angular';
+import { StateEmitter, EventSource, AfterViewInit } from '@lithiumjs/angular';
 import { Subject, Observable, combineLatest } from 'rxjs';
 import { PresetTheme } from 'src/app/models/preset-theme';
 import { map, filter, mergeMapTo, delay, switchMap } from 'rxjs/operators';
-import { ThemeContainer, ThemeLoader, ThemeGenerator } from '@lithiumjs/ngx-material-theming';
+import { ThemeContainer, ThemeLoader } from '@lithiumjs/ngx-material-theming';
 import { AppThemeLoader } from 'src/app/services/theme-loader';
 import { BaseComponent } from '../base-component';
+import { ThemeGenerator } from '@lithiumjs/ngx-material-theming/dynamic';
 
 @Component({
     selector: 'app-basic-theme-creator',
@@ -72,8 +73,8 @@ export class BasicThemeCreatorComponent extends BaseComponent {
                     warnPalette: ThemeGenerator.createPalette(theme.warn),
                     isDark
                 }).pipe(map(() => {
-                    this.themeContainer.theme$.next(themeName);
-                    this.themeContainer.active$.next(true);
+                    this.themeContainer.theme = themeName;
+                    this.themeContainer.active = true;
                 }));
             }))).subscribe();
     }

@@ -30,10 +30,8 @@ import { AdvancedThemeCreatorComponent } from './advanced-theme-creator/advanced
     imports: [
         CommonModule,
         FormsModule,
-
         ColorPickerModule,
         NgxMaterialThemingModule,
-
         MatCardModule,
         MatFormFieldModule,
         MatInputModule,
@@ -55,11 +53,6 @@ import { AdvancedThemeCreatorComponent } from './advanced-theme-creator/advanced
         MatExpansionModule
     ],
     declarations: [
-        BasicThemeCreatorComponent,
-        AdvancedThemeCreatorComponent,
-        ThemePreviewComponent
-    ],
-    entryComponents: [
         BasicThemeCreatorComponent,
         AdvancedThemeCreatorComponent,
         ThemePreviewComponent

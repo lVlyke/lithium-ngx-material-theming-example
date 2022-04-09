@@ -1,7 +1,7 @@
-@use '~@angular/material' as mat;
+@use '@angular/material' as mat;
 
 // Normalize CSS styles accross browsers
-@import "~normalize.css/normalize";
+@import "normalize.css/normalize";
 
 // Only include this once
 @include mat.core();

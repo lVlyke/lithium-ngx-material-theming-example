@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ThemeGenerator, ThemeCreationOptions } from '@lithiumjs/ngx-material-theming';
-import { map, publishReplay, refCount } from 'rxjs/operators';
+import { ThemeCreator } from '@lithiumjs/ngx-material-theming';
+import { ThemeCreationOptions } from '@lithiumjs/ngx-material-theming/dynamic';
+import { map } from 'rxjs/operators';
 import { environment } from "../../environments/environment";
 
 @Injectable({ providedIn: 'root' })
@@ -18,7 +19,7 @@ export class AppThemeLoader {
 
     public createFromTemplate(options: ThemeCreationOptions): Observable<string> {
         return this.loadTemplate$(options.isDark).pipe(
-            map(templateData => ThemeGenerator.createFromTemplate({
+            map(templateData => ThemeCreator.createFromTemplate({
                 templateData,
                 ...options
             }))
