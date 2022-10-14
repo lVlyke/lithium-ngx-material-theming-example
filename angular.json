@@ -123,5 +123,7 @@
       }
     }
   },
-  "defaultProject": "ngx-material-theming-example"
+  "cli": {
+    "analytics": false
+  }
 }
