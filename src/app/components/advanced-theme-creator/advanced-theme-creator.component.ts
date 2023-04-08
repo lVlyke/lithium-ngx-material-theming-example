@@ -20,17 +20,21 @@ export class AdvancedThemeCreatorComponent extends LiComponent {
 
     private static readonly THEME_PREVIEW_NAME = '--new-advanced-theme';
 
-    public readonly paletteColors: Array<keyof ThemeCreator.Palette & number> = [
-        50,
-        100,
-        200,
-        300,
-        400,
-        500,
-        600,
-        700,
-        800,
-        900
+    public readonly paletteColors: Array<keyof ThemeCreator.PaletteBase> = [
+        "50",
+        "100",
+        "200",
+        "300",
+        "400",
+        "500",
+        "600",
+        "700",
+        "800",
+        "900",
+        "A100",
+        "A200",
+        "A400",
+        "A700"
     ];
 
     public readonly activeElement = document.activeElement;
@@ -95,7 +99,7 @@ export class AdvancedThemeCreatorComponent extends LiComponent {
         this.accentPalette$.next(computePalette(PresetTheme.profiles.default.accent));
         this.warnPalette$.next(computePalette(PresetTheme.profiles.default.warn));
 
-        combineLatest(this.primaryPalette$, this.accentPalette$, this.warnPalette$)
+        combineLatest([this.primaryPalette$, this.accentPalette$, this.warnPalette$])
             .pipe(map(([primary, accent, warn]) => ({ primary, accent, warn })))
             .subscribe(this.theme$);
 
@@ -122,7 +126,7 @@ export class AdvancedThemeCreatorComponent extends LiComponent {
         // Update the theme when the input values change
         this.afterViewInit$
             .pipe(delay(0))
-            .pipe(mergeMapTo(combineLatest(this.theme$, this.darkTheme$)))
+            .pipe(mergeMapTo(combineLatest([this.theme$, this.darkTheme$])))
             .pipe(filter(([theme]) => !!theme))
             .pipe(switchMap(([theme, isDark]) => {
                 const themeName = AdvancedThemeCreatorComponent.THEME_PREVIEW_NAME;
@@ -140,8 +144,7 @@ export class AdvancedThemeCreatorComponent extends LiComponent {
                 }));
             })).subscribe();
 
-        this.onDestroy$
-            .subscribe(() => ThemeLoader.unloadCompiled(AdvancedThemeCreatorComponent.THEME_PREVIEW_NAME));
+        this.onDestroy$.subscribe(() => ThemeLoader.unloadCompiled(AdvancedThemeCreatorComponent.THEME_PREVIEW_NAME));
     }
 }
 
