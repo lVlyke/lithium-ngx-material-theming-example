@@ -1,5 +1,5 @@
-<li-theme-container>
-    <mat-card class="overlay-card">
+<li-theme-container [manageOverlay]="false">
+    <mat-card appearance="outlined" class="overlay-card">
         <mat-toolbar color="primary">New Theme (Basic)</mat-toolbar>
 
         <mat-card-content>
@@ -7,15 +7,15 @@
                 <mat-checkbox color="primary" name="darkTheme" [(ngModel)]="darkTheme"></mat-checkbox>
                 <mat-label class="dark-theme-label">Dark Theme</mat-label>
 
-                <mat-card class="color-card" id="primary-card">
+                <mat-card appearance="outlined" class="color-card" id="primary-card">
                     <ng-container *ngTemplateOutlet="colorInputTemplate; context: { $implicit: 'primaryColor', label: 'Primary Color' }"></ng-container>
                 </mat-card>
 
-                <mat-card class="color-card" id="accent-card">
+                <mat-card appearance="outlined" class="color-card" id="accent-card">
                     <ng-container *ngTemplateOutlet="colorInputTemplate; context: { $implicit: 'accentColor', label: 'Accent Color' }"></ng-container>
                 </mat-card>
 
-                <mat-card class="color-card" id="warn-card">
+                <mat-card appearance="outlined" class="color-card" id="warn-card">
                     <ng-container *ngTemplateOutlet="colorInputTemplate; context: { $implicit: 'warnColor', label: 'Warn Color' }"></ng-container>
                 </mat-card>
 
@@ -26,7 +26,7 @@
                         type="text"
                         autocomplete="off"
                         required
-                        pattern="-?[a-zA-Z\_]+[a-zA-Z0-9\-\_]*"
+                        pattern="-?[a-zA-Z_]+[a-zA-Z0-9\-_]*"
                         placeholder="my-new-theme"
                         name="themeName"
                         [(ngModel)]="themeName">

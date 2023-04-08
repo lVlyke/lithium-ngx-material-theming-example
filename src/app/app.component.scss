@@ -5,7 +5,9 @@
     padding: 0.8rem;
     z-index: 999;
 
-    a {
+    a#github-link {
+        display: block;
+
         @media screen and (orientation: landscape) {
             width: 3.3vw;
             height: 3.3vw;

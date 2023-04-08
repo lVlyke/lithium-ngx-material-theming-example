@@ -7,7 +7,7 @@ form {
     mat-checkbox, mat-label, mat-form-field, button {
         margin-right: 0.5rem;
     }
-
+    
     mat-select {
         display: inline;
     }
@@ -16,7 +16,7 @@ form {
         width: 50%;
     }
 
-    ::ng-deep .mat-tab-body {
+    ::ng-deep .mat-mdc-tab-body {
         padding: 1rem;
         height: 200px;
     }

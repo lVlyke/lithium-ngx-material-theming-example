@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgxMaterialThemingModule } from '@lithiumjs/ngx-material-theming';
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { OverlayHelpers } from './services/overlay-helpers';
 import { OverlayModule } from '@angular/cdk/overlay';

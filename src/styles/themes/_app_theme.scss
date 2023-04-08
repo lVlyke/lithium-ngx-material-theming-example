@@ -9,7 +9,7 @@
     $warn,
     $is-dark: false
 ) {
-    @include mat-theming.declare-legacy-theme(
+    @include mat-theming.declare-theme(
         $name,
         $primary,
         $accent,
@@ -22,7 +22,7 @@
 }
 
 @mixin declare-template-theme($is-dark: false) {
-    @include mat-theming.declare-legacy-template-theme($is-dark) {
+    @include mat-theming.declare-template-theme($is-dark) {
         // We define our custom override theme styles here:
         @include theme-exts.declare(
             mat-theming.$template-primary-palette,

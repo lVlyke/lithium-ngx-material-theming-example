@@ -108,11 +108,11 @@
 
     <h3>Chips</h3>
     <div>
-        <mat-chip-list>
-            <mat-chip color="primary" selected>Normal</mat-chip>
-            <mat-chip color="accent" selected>Easy</mat-chip>
-            <mat-chip color="warn" selected>Hard</mat-chip>
-        </mat-chip-list>
+        <mat-chip-listbox>
+            <mat-chip-option color="primary" selected>Normal</mat-chip-option>
+            <mat-chip-option color="accent" selected>Easy</mat-chip-option>
+            <mat-chip-option color="warn" selected>Hard</mat-chip-option>
+        </mat-chip-listbox>
     </div>
 
     <div>
@@ -132,7 +132,9 @@
     </div>
 
     <div>
-        <mat-slider name="sliderValue" [(ngModel)]="sliderValue" [color]="sliderValue > 33 ? sliderValue > 66 ? 'warn' : 'accent' : 'primary'"></mat-slider>
+        <mat-slider [color]="sliderValue > 33 ? sliderValue > 66 ? 'warn' : 'accent' : 'primary'">
+            <input matSliderThumb name="sliderValue" [(ngModel)]="sliderValue" />
+        </mat-slider>
     </div>
 
     <h3>Layout</h3>

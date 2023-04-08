@@ -45,25 +45,24 @@ mat-toolbar {
         }
     }
 
-    h1.mat-subheader {
+    h1.mat-mdc-subheader {
         font-weight: 800;
     }
 
-    h3.mat-subheader {
+    h3.mat-mdc-subheader {
         font-weight: 700;
     }
 
-    #user-info::ng-deep .mat-list-item-content {
-        padding-left: 0;
-    }
 
     #lists-header {
         display: flex;
         flex-direction: row;
         align-items: center;
+        margin: 0.25rem;
+        font-size: 1.2em;
 
         > mat-icon {
-            padding-right: 0.25rem;
+            margin-right: 0.25rem;
             font-size: 22px;
             width: 22px;
             height: 22px;
@@ -74,24 +73,23 @@ mat-toolbar {
         width: 100%;
         padding-top: 0.4rem;
 
-        &.mat-form-field-should-float #add-theme-label-icon {
+        &.mat-focused #add-theme-label-icon {
             display: none;
         }
 
-        &:not(.mat-form-field-should-float) {
+        &:not(.mat-focused) {
 
             #add-theme-label-text {
                 display: none;
             }
 
-            ::ng-deep .mat-form-field-outline {
-                color: transparent;
+            ::ng-deep .mdc-notched-outline {
+                border-color: none !important;
             }
         }
 
         #add-theme-select {
-
-            ::ng-deep .mat-select-arrow {
+            ::ng-deep .mat-mdc-select-arrow {
                 display: none;
             }
         }
@@ -100,12 +98,8 @@ mat-toolbar {
             width: 100%;
         }
 
-        ::ng-deep .mat-form-field-outline {
+        ::ng-deep .mdc-notched-outline {
             @include mat.elevation(2);
-        }
-
-        ::ng-deep .mat-form-field-flex:hover {
-            background: rgba(black, 0.015);
         }
 
         #add-theme-label {
@@ -115,56 +109,53 @@ mat-toolbar {
         }
 
         #add-theme-label-icon {
-            width: 24px;
+            width: 128px;
             height: 24px;
+            margin-left: 24px;
             font-size: 24px;
             line-height: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     }
 }
 
 #sidenav-radio-group mat-radio-button {
+    display: block;
     width: 100%;
     padding: 0;
-    border-radius: 0;
 
-    &::ng-deep .mat-radio-container {
+    &::ng-deep .mdc-form-field {
+        display: block;
+        width: 100%;
+        min-height: 3rem;
+    }
+
+    &::ng-deep .mdc-radio {
+        position: absolute;
         display: none;
     }
 
     &::ng-deep label {
+        display: flex;
+        align-items: center;
         width: 100%;
+        height: 3rem;
+        cursor: pointer;
 
-        & .mat-radio-label-content {
-            padding: 0.7rem;
-            width: 90%;
+        .theme-label-data {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
 
-            &, .theme-label-data {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-
-                > * {
-                    margin-right: 0.4rem;
-                }
-            }
-
-            > .list-name {
-                max-width: 90%;
-                text-overflow: ellipsis;
-                overflow: hidden;
-                white-space: nowrap;
-            }
-
-            mat-icon {
-                font-size: 1rem;
-                width: 1rem;
-                height: 1rem;
+            > * {
+                margin-right: 0.4rem;
             }
         }
     }
 
-    &.mat-radio-checked {
+    &.selected {
         font-weight: bold;
     }
 }
@@ -178,6 +169,7 @@ mat-sidenav-content {
 
     mat-card.theme-color-card {
         margin: 0.25rem 0;
+        padding: 16px;
 
         .theme-color-hex {
             font-size: 0.9rem;
