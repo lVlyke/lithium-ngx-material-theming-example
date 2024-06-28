@@ -9,28 +9,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { OverlayHelpers } from './services/overlay-helpers';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ComponentsModule } from './components/components.module';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
-@NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    HttpClientModule,
-
-    OverlayModule,
-    MatButtonModule,
-    MatIconModule,
-
-    NgxMaterialThemingModule,
-
-    ComponentsModule
-  ],
-  providers: [
-    OverlayHelpers
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserAnimationsModule,
+        AppRoutingModule,
+        OverlayModule,
+        MatButtonModule,
+        MatIconModule,
+        NgxMaterialThemingModule,
+        ComponentsModule], providers: [
+        OverlayHelpers,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule { }

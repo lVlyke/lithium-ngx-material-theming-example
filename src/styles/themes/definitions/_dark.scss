@@ -2,8 +2,8 @@
 @use "../app_theme" as theme;
 
 @include theme.declare-theme("dark",
-    $primary: mat.define-palette(mat.$green-palette),
-    $accent: mat.define-palette(mat.$blue-palette),
-    $warn: mat.define-palette(mat.$red-palette),
+    $primary: mat.m2-define-palette(mat.$m2-green-palette),
+    $accent: mat.m2-define-palette(mat.$m2-blue-palette),
+    $warn: mat.m2-define-palette(mat.$m2-red-palette),
     $is-dark: true
 );

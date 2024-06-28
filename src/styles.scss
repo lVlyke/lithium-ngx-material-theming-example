@@ -1,10 +1,11 @@
 @use '@angular/material' as mat;
+@use '@lithiumjs/ngx-material-theming' as mat-theming;
 
 // Normalize CSS styles accross browsers
 @import "normalize.css/normalize";
 
 // Only include these once:
-@include mat.all-component-typographies();
+@include mat-theming.m2-all-static-component-dimensions();
 @include mat.core();
 
 // We'll bundle the default and dark themes with the app itself

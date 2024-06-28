@@ -2,7 +2,7 @@
 @use "../app_theme" as theme;
 
 @include theme.declare-theme("default",
-    $primary: mat.define-palette(mat.$blue-palette),
-    $accent: mat.define-palette(mat.$pink-palette, A200, A100, A400),
-    $warn: mat.define-palette(mat.$red-palette)
+    $primary: mat.m2-define-palette(mat.$m2-blue-palette),
+    $accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400),
+    $warn: mat.m2-define-palette(mat.$m2-red-palette)
 );
