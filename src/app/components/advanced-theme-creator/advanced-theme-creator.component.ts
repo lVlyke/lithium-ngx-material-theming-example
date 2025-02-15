@@ -14,7 +14,8 @@ export type AdvancedThemeProfile = {
 @Component({
     selector: 'app-advanced-theme-creator',
     templateUrl: './advanced-theme-creator.component.html',
-    styleUrls: ['./advanced-theme-creator.component.scss']
+    styleUrls: ['./advanced-theme-creator.component.scss'],
+    standalone: false
 })
 export class AdvancedThemeCreatorComponent extends LiComponent {
 

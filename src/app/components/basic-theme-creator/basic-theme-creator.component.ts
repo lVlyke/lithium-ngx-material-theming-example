@@ -12,7 +12,8 @@ import { ThemeGenerator } from '@lithiumjs/ngx-material-theming/dynamic';
     selector: 'app-basic-theme-creator',
     templateUrl: './basic-theme-creator.component.html',
     styleUrls: ['./basic-theme-creator.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class BasicThemeCreatorComponent extends BaseComponent {
 

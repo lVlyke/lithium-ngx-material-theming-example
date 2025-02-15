@@ -6,7 +6,8 @@
 
 // Only include these once:
 @include mat-theming.m2-all-static-component-dimensions();
-@include mat.core();
+@include mat.elevation-classes();
+@include mat.app-background();
 
 // We'll bundle the default and dark themes with the app itself
 @import "styles/themes/definitions/default";

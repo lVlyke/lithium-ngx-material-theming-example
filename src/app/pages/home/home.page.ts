@@ -17,7 +17,8 @@ import { BaseComponent } from 'src/app/components/base-component';
     templateUrl: './home.page.html',
     styleUrls: ['./home.page.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [ComponentState.create(HomePageComponent)]
+    providers: [ComponentState.create(HomePageComponent)],
+    standalone: false
 })
 export class HomePageComponent extends BaseComponent {
 

@@ -5,7 +5,8 @@ import { BaseComponent } from '../base-component';
     selector: 'app-theme-preview',
     templateUrl: './theme-preview.component.html',
     styleUrls: ['./theme-preview.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ThemePreviewComponent extends BaseComponent {
 
