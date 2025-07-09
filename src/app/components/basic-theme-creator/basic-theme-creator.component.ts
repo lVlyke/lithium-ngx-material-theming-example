@@ -1,82 +1,119 @@
-import { Component, Output, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Injector } from '@angular/core';
-import { StateEmitter, EventSource, AfterViewInit } from '@lithiumjs/angular';
-import { Subject, Observable, combineLatest } from 'rxjs';
-import { PresetTheme } from 'src/app/models/preset-theme';
-import { map, filter, mergeMapTo, delay, switchMap } from 'rxjs/operators';
+import { Component, Output, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, EventEmitter } from '@angular/core';
+import { AfterViewInit, ComponentState, ComponentStateRef, DeclareState } from '@lithiumjs/angular';
+import { Observable, combineLatest } from 'rxjs';
+import { PresetTheme } from '../../models/preset-theme';
+import { map, filter, mergeMap, delay, switchMap, tap } from 'rxjs/operators';
 import { ThemeContainer, ThemeLoader } from '@lithiumjs/ngx-material-theming';
-import { AppThemeLoader } from 'src/app/services/theme-loader';
+import { AppThemeLoader } from '../../services/theme-loader';
 import { BaseComponent } from '../base-component';
 import { ThemeGenerator } from '@lithiumjs/ngx-material-theming/dynamic';
+import { ColorPickerDirective } from 'ngx-color-picker';
+import { NgTemplateOutlet } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { MatInput } from '@angular/material/input';
+import { MatGridList, MatGridTile } from '@angular/material/grid-list';
+import { MatToolbar } from '@angular/material/toolbar';
+import { MatFormField, MatLabel } from '@angular/material/select';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatButton } from '@angular/material/button';
 
 @Component({
     selector: 'app-basic-theme-creator',
     templateUrl: './basic-theme-creator.component.html',
     styleUrls: ['./basic-theme-creator.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [
+        FormsModule,
+
+        NgTemplateOutlet,
+        MatCard,
+        MatCardContent,
+        MatFormField,
+        MatToolbar,
+        MatLabel,
+        MatInput,
+        MatGridList,
+        MatGridTile,
+        MatCheckbox,
+        MatButton,
+
+        ThemeContainer,
+        ColorPickerDirective
+    ],
+    providers: [ComponentState.create(BasicThemeCreatorComponent)]
 })
 export class BasicThemeCreatorComponent extends BaseComponent {
 
     private static readonly THEME_PREVIEW_NAME = '--new-basic-theme';
 
-    @AfterViewInit()
-    private readonly afterViewInit$: Observable<void>;
+    @Output('cancel')
+    public readonly cancel$ = new EventEmitter<void>();
 
-    @EventSource()
-    public readonly onCancel$: Observable<void>;
-
-    @EventSource()
-    public readonly onSubmit$: Observable<void>;
+    @Output('submit')
+    public readonly submit$ = new EventEmitter<void>();
 
     @Output('theme')
-    @StateEmitter()
-    public readonly theme$: Subject<PresetTheme.Profile>;
+    public readonly theme$: EventEmitter<PresetTheme.Profile | undefined>;
 
     @Output('themeName')
-    @StateEmitter({ initialValue: '' })
-    public readonly themeName$: Subject<string>;
+    public readonly themeName$: EventEmitter<string>;
 
     @Output('darkTheme')
-    @StateEmitter({ initialValue: false })
-    public readonly darkTheme$: Subject<boolean>;
+    public readonly darkTheme$: EventEmitter<boolean>;
 
-    @StateEmitter({ initialValue: PresetTheme.profiles.default.primary })
-    protected readonly primaryColor$: Subject<string>;
+    public primaryColor = PresetTheme.profiles.default.primary;
+    public accentColor = PresetTheme.profiles.default.accent;
+    public warnColor = PresetTheme.profiles.default.warn;
 
-    @StateEmitter({ initialValue: PresetTheme.profiles.default.accent })
-    protected readonly accentColor$: Subject<string>;
+    @DeclareState()
+    public theme?: PresetTheme.Profile;
 
-    @StateEmitter({ initialValue: PresetTheme.profiles.default.warn })
-    protected readonly warnColor$: Subject<string>;
+    public themeName = '';
+    public darkTheme = false;
 
-    @ViewChild(ThemeContainer)
-    private readonly themeContainer: ThemeContainer;
+    @ViewChild(ThemeContainer, { static: true })
+    protected readonly themeContainer!: ThemeContainer;
 
-    constructor(injector: Injector, cdRef: ChangeDetectorRef, appThemeLoader: AppThemeLoader) {
-        super(injector, cdRef);
+    @AfterViewInit()
+    private readonly afterViewInit$!: Observable<void>;
 
-        combineLatest(this.primaryColor$, this.accentColor$, this.warnColor$)
-            .pipe(map(([primary, accent, warn]) => ({ primary, accent, warn })))
-            .subscribe(this.theme$);
+    constructor(
+        readonly cdRef: ChangeDetectorRef,
+        readonly appThemeLoader: AppThemeLoader,
+        readonly stateRef: ComponentStateRef<BasicThemeCreatorComponent>
+    ) {
+        super(cdRef);
 
-        this.afterViewInit$
-            .pipe(delay(0))
-            .pipe(mergeMapTo(combineLatest(this.theme$, this.darkTheme$)))
-            .pipe(filter(([theme]) => !!theme))
-            .pipe(switchMap((([theme, isDark]) => {
+        this.theme$ = stateRef.emitter("theme");
+        this.themeName$ = stateRef.emitter("themeName");
+        this.darkTheme$ = stateRef.emitter("darkTheme");
+
+        // Update theme on palette changes
+        combineLatest(stateRef.getAll("primaryColor", "accentColor", "warnColor")).pipe(
+            map(([primary, accent, warn]) => ({ primary, accent, warn }))
+        ).subscribe(theme => this.theme = theme);
+
+        // Re-render the theme when changed
+        this.afterViewInit$.pipe(
+            delay(0),
+            mergeMap(() => combineLatest(stateRef.getAll("theme", "darkTheme"))),
+            filter(([theme]) => !!theme),
+            switchMap((([theme, isDark]) => {
                 const themeName = BasicThemeCreatorComponent.THEME_PREVIEW_NAME;
                 ThemeLoader.unloadCompiled(themeName);
                 
                 return appThemeLoader.createFromTemplate({
                     name: themeName,
-                    primaryPalette: ThemeGenerator.createPalette(theme.primary),
-                    accentPalette: ThemeGenerator.createPalette(theme.accent),
-                    warnPalette: ThemeGenerator.createPalette(theme.warn),
+                    primaryPalette: ThemeGenerator.createPalette(theme!.primary),
+                    accentPalette: ThemeGenerator.createPalette(theme!.accent),
+                    warnPalette: ThemeGenerator.createPalette(theme!.warn),
                     isDark
-                }).pipe(map(() => {
+                }).pipe(tap(() => {
                     this.themeContainer.theme = themeName;
                     this.themeContainer.active = true;
                 }));
-            }))).subscribe();
+            }))
+        ).subscribe();
     }
 }

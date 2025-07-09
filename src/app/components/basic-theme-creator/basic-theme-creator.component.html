@@ -1,22 +1,24 @@
 <li-theme-container [manageOverlay]="false">
-    <mat-card appearance="outlined" class="overlay-card">
+    <mat-card appearance="outlined" class="overlay-card mat-app-background">
         <mat-toolbar color="primary">New Theme (Basic)</mat-toolbar>
 
         <mat-card-content>
             <form>
-                <mat-checkbox color="primary" name="darkTheme" [(ngModel)]="darkTheme"></mat-checkbox>
+                <mat-checkbox color="primary"
+                              name="darkTheme"
+                              [(ngModel)]="darkTheme" />
                 <mat-label class="dark-theme-label">Dark Theme</mat-label>
 
                 <mat-card appearance="outlined" class="color-card" id="primary-card">
-                    <ng-container *ngTemplateOutlet="colorInputTemplate; context: { $implicit: 'primaryColor', label: 'Primary Color' }"></ng-container>
+                    <ng-container *ngTemplateOutlet="colorInputTemplate; context: { $implicit: 'primaryColor', label: 'Primary Color' }" />
                 </mat-card>
 
                 <mat-card appearance="outlined" class="color-card" id="accent-card">
-                    <ng-container *ngTemplateOutlet="colorInputTemplate; context: { $implicit: 'accentColor', label: 'Accent Color' }"></ng-container>
+                    <ng-container *ngTemplateOutlet="colorInputTemplate; context: { $implicit: 'accentColor', label: 'Accent Color' }" />
                 </mat-card>
 
                 <mat-card appearance="outlined" class="color-card" id="warn-card">
-                    <ng-container *ngTemplateOutlet="colorInputTemplate; context: { $implicit: 'warnColor', label: 'Warn Color' }"></ng-container>
+                    <ng-container *ngTemplateOutlet="colorInputTemplate; context: { $implicit: 'warnColor', label: 'Warn Color' }" />
                 </mat-card>
 
                 <mat-form-field class="name-field">
@@ -34,11 +36,16 @@
 
                 <mat-grid-list [cols]="2" gutterSize="0.5rem" rowHeight="38px">
                     <mat-grid-tile>
-                        <button mat-stroked-button color="primary" (click)="onCancel()">Cancel</button>
+                        <button mat-stroked-button color="primary" (click)="cancel$.emit()">Cancel</button>
                     </mat-grid-tile>
 
                     <mat-grid-tile>
-                        <button mat-raised-button color="primary" [disabled]="!themeName || themeNameInput.errorState" (click)="onSubmit()">Create</button>
+                        <button mat-raised-button
+                                color="primary"
+                                [disabled]="!themeName || themeNameInput.errorState"
+                                (click)="submit$.emit()">
+                            Create
+                        </button>
                     </mat-grid-tile>
                 </mat-grid-list>
 
@@ -48,12 +55,12 @@
                         <mat-grid-tile class="input-tile">
                             <input class="color-picker-input"
                                     #input
-                                    [(colorPicker)]="this[color]"
+                                    [(colorPicker)]="$any(this)[color]"
                                     [cpCancelButton]="true"
                                     cpCancelButtonClass="mat-primary mat-button mat-stroked-button picker-button"
                                     [cpOKButton]="true"
                                     cpOKButtonClass="mat-primary mat-button mat-raised-button picker-button"
-                                    [style.background]="this[color]">
+                                    [style.background]="$any(this)[color]">
                         </mat-grid-tile>
 
                         <mat-grid-tile class="label-tile" [colspan]="4">

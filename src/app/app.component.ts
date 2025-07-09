@@ -1,4 +1,6 @@
-import { Component, ChangeDetectionStrategy, Injector, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { ThemeContainer } from '@lithiumjs/ngx-material-theming';
 import { BaseComponent } from './components/base-component';
 
 @Component({
@@ -6,11 +8,14 @@ import { BaseComponent } from './components/base-component';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [
+        RouterModule,
+        ThemeContainer
+    ]
 })
 export class AppComponent extends BaseComponent {
 
-  constructor(injector: Injector, cdRef: ChangeDetectorRef) {
-      super(injector, cdRef);
+  constructor(cdRef: ChangeDetectorRef) {
+      super(cdRef);
   }
 }

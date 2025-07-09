@@ -23,74 +23,74 @@
 
     <h3>Basic Buttons</h3>
     <div class="example-button-row">
-    <button mat-button>Basic</button>
-    <button mat-button color="primary">Primary</button>
-    <button mat-button color="accent">Accent</button>
-    <button mat-button color="warn">Warn</button>
-    <button mat-button disabled>Disabled</button>
-    <a mat-button routerLink=".">Link</a>
+        <button mat-button>Basic</button>
+        <button mat-button color="primary">Primary</button>
+        <button mat-button color="accent">Accent</button>
+        <button mat-button color="warn">Warn</button>
+        <button mat-button disabled>Disabled</button>
+        <a mat-button routerLink=".">Link</a>
     </div>
 
     <h3>Raised Buttons</h3>
     <div class="example-button-row">
-    <button mat-raised-button>Basic</button>
-    <button mat-raised-button color="primary">Primary</button>
-    <button mat-raised-button color="accent">Accent</button>
-    <button mat-raised-button color="warn">Warn</button>
-    <button mat-raised-button disabled>Disabled</button>
-    <a mat-raised-button routerLink=".">Link</a>
+        <button mat-raised-button>Basic</button>
+        <button mat-raised-button color="primary">Primary</button>
+        <button mat-raised-button color="accent">Accent</button>
+        <button mat-raised-button color="warn">Warn</button>
+        <button mat-raised-button disabled>Disabled</button>
+        <a mat-raised-button routerLink=".">Link</a>
     </div>
 
     <h3>Stroked Buttons</h3>
     <div class="example-button-row">
-    <button mat-stroked-button>Basic</button>
-    <button mat-stroked-button color="primary">Primary</button>
-    <button mat-stroked-button color="accent">Accent</button>
-    <button mat-stroked-button color="warn">Warn</button>
-    <button mat-stroked-button disabled>Disabled</button>
-    <a mat-stroked-button routerLink=".">Link</a>
+        <button mat-stroked-button>Basic</button>
+        <button mat-stroked-button color="primary">Primary</button>
+        <button mat-stroked-button color="accent">Accent</button>
+        <button mat-stroked-button color="warn">Warn</button>
+        <button mat-stroked-button disabled>Disabled</button>
+        <a mat-stroked-button routerLink=".">Link</a>
     </div>
 
     <h3>Flat Buttons</h3>
     <div class="example-button-row">
-    <button mat-flat-button>Basic</button>
-    <button mat-flat-button color="primary">Primary</button>
-    <button mat-flat-button color="accent">Accent</button>
-    <button mat-flat-button color="warn">Warn</button>
-    <button mat-flat-button disabled>Disabled</button>
-    <a mat-flat-button routerLink=".">Link</a>
+        <button mat-flat-button>Basic</button>
+        <button mat-flat-button color="primary">Primary</button>
+        <button mat-flat-button color="accent">Accent</button>
+        <button mat-flat-button color="warn">Warn</button>
+        <button mat-flat-button disabled>Disabled</button>
+        <a mat-flat-button routerLink=".">Link</a>
     </div>
 
     <h3>Icon Buttons</h3>
     <div class="example-button-row">
-    <button mat-icon-button>
-        <mat-icon matBadge="5" matBadgePosition="above after">favorite</mat-icon>
-    </button>
-    <button mat-icon-button color="primary">
-        <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button color="accent">
-        <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button color="warn">
-        <mat-icon matBadge="2" matBadgePosition="above after" matBadgeColor="accent">favorite</mat-icon>
-    </button>
-    <button mat-icon-button disabled>
-        <mat-icon>favorite</mat-icon>
-    </button>
+        <button mat-icon-button>
+            <mat-icon matBadge="5" matBadgePosition="above after">favorite</mat-icon>
+        </button>
+        <button mat-icon-button color="primary">
+            <mat-icon>favorite</mat-icon>
+        </button>
+        <button mat-icon-button color="accent">
+            <mat-icon>favorite</mat-icon>
+        </button>
+        <button mat-icon-button color="warn">
+            <mat-icon matBadge="2" matBadgePosition="above after" matBadgeColor="accent">favorite</mat-icon>
+        </button>
+        <button mat-icon-button disabled>
+            <mat-icon>favorite</mat-icon>
+        </button>
     </div>
 
     <h3>Fab Buttons</h3>
     <div class="example-button-row">
-    <button mat-fab>Basic</button>
-    <button mat-fab color="primary">Primary</button>
-    <button mat-fab color="accent">Accent</button>
-    <button mat-fab color="warn">Warn</button>
-    <button mat-fab disabled>Disabled</button>
-    <button mat-fab>
-        <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
-    </button>
-    <a mat-fab routerLink=".">Link</a>
+        <button mat-fab>Basic</button>
+        <button mat-fab color="primary">Primary</button>
+        <button mat-fab color="accent">Accent</button>
+        <button mat-fab color="warn">Warn</button>
+        <button mat-fab disabled>Disabled</button>
+        <button mat-fab>
+            <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+        </button>
+        <a mat-fab routerLink=".">Link</a>
     </div>
 
     <h3>Inputs</h3>
@@ -124,9 +124,9 @@
 
         <mat-form-field>
             <mat-select placeholder="Select">
-                <mat-option *ngFor="let food of ['Apple', 'Banana', 'Strawberry']" [value]="food">
-                    {{ food }}
-                </mat-option>
+                @for (food of ['Apple', 'Banana', 'Strawberry']; track food) {
+                    <mat-option [value]="food">{{ food }}</mat-option>
+                }
             </mat-select>
         </mat-form-field>
     </div>
@@ -142,18 +142,18 @@
         <mat-toolbar>List</mat-toolbar>
         <mat-action-list class="mat-app-background">
             <button mat-list-item>
-                <mat-icon matListIcon color="primary">favorite</mat-icon>
+                <mat-icon matListItemIcon color="primary">favorite</mat-icon>
                 Item 1
-            </button >
+            </button>
             <button mat-list-item>
-                <mat-icon matListIcon color="accent">stars</mat-icon>
+                <mat-icon matListItemIcon color="accent">stars</mat-icon>
                 Item 2
-            </button >
+            </button>
             <button mat-list-item>
-                <mat-icon matListIcon color="warn">cancel</mat-icon>
+                <mat-icon matListItemIcon color="warn">cancel</mat-icon>
                 Item 3
-            </button >
-        </mat-action-list>       
+            </button>
+        </mat-action-list>
     </div>
 
     <div>
@@ -168,6 +168,6 @@
             <mat-tab label="Tab 3">
                 <mat-spinner color="warn"></mat-spinner>
             </mat-tab>
-        </mat-tab-group>                  
+        </mat-tab-group>
     </div>
 </form>
