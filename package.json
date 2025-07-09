@@ -7,11 +7,11 @@
   "scripts": {
     "preng": "ltc ./src/styles/themes/templates/dark.scss ./src/assets/dark_theme.css && ltc ./src/styles/themes/templates/light.scss ./src/assets/light_theme.css",
     "ng": "ng",
-    "start": "npm run ng serve",
-    "build": "npm run ng build",
-    "test": "npm run ng test",
-    "lint": "npm run ng lint",
-    "e2e": "npm run ng e2e"
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
