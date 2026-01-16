@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^20.0.5",
-    "@angular/cli": "^20.0.5",
+    "@angular/cli": "^21.1.0",
     "@angular/compiler-cli": "^20.0.6",
     "@angular/language-service": "^20.0.6",
     "@types/chroma-js": "2.4.4",
